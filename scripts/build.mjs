@@ -152,8 +152,8 @@ for (const ep of episodios) {
   escrever(`stream/series/${idVideo(ep)}.json`, {
     streams: ep.streams.map((s) => ({
       name: "Naruto Kai\nDublado",
-      title: `${codigo(ep)} — ${ep.titulo}\n🇧🇷 Português (Brasil)`,
       ...s,
+      title: `${codigo(ep)} — ${ep.titulo}\n🇧🇷 Dublado${minutos(ep) ? ` · ${minutos(ep)} min` : ""}`,
       behaviorHints: { bingeGroup: `${serie.id}-dublado`, ...s.behaviorHints },
     })),
   });
