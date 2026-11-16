@@ -26,6 +26,7 @@ https://eipastel.github.io/naruto-kai-dub/manifest.json
 
 - **Computador/celular:** abra <https://eipastel.github.io/naruto-kai-dub/> e clique em **Instalar no Stremio**.
 - **TV LG:** no Stremio da TV, vá em *Complementos*, cole o endereço na busca e instale. Ou instale no computador com a mesma conta: a TV sincroniza.
+- **TV que mostra "This catalog did not return any content":** use o espelho no jsDelivr, com outro certificado: `https://cdn.jsdelivr.net/gh/eipastel/naruto-kai-dub@addon/manifest.json`.
 
 Os vídeos tocam a partir do computador onde os MP4 foram gerados (`python -m ferramentas servir`), na mesma rede de casa.
 
