@@ -1,0 +1,15 @@
+{
+  "name": "naruto-kai-dub",
+  "version": "1.0.0",
+  "description": "Complemento Stremio do Naruto Kai com dublagem brasileira",
+  "private": true,
+  "type": "module",
+  "license": "MIT",
+  "engines": { "node": ">=20" },
+  "scripts": {
+    "validar": "node scripts/build.mjs --validar",
+    "build": "node scripts/build.mjs",
+    "local": "node scripts/servir-addon.mjs",
+    "test": "node scripts/build.mjs --validar && python -m unittest discover -s tests -v"
+  }
+}

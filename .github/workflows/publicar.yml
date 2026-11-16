@@ -1,0 +1,56 @@
+name: Validar e publicar
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  testes:
+    name: Validar dados e testar ferramentas
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Instalar FFmpeg
+        run: sudo apt-get update && sudo apt-get install -y ffmpeg
+      - name: Instalar dependências Python
+        run: pip install -r requirements.txt
+      - name: Validar dados dos episódios
+        run: npm run validar
+      - name: Testar ferramentas (mídia sintética, nenhum vídeo real)
+        run: python -m unittest discover -s tests -v
+      - name: Gerar complemento
+        run: npm run build
+      - uses: actions/upload-pages-artifact@v3
+        if: github.ref == 'refs/heads/main'
+        with:
+          path: dist
+
+  publicar:
+    name: Publicar no GitHub Pages
+    needs: testes
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deploy.outputs.page_url }}
+    steps:
+      - id: deploy
+        uses: actions/deploy-pages@v4

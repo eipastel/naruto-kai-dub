@@ -1,0 +1,30 @@
+# Mídia nunca vai para o repositório
+*.mkv
+*.mp4
+*.m4v
+*.avi
+*.webm
+*.ts
+*.m2ts
+*.aac
+*.ac3
+*.eac3
+*.flac
+*.wav
+*.mp3
+*.opus
+*.srt
+*.ass
+*.filtro.txt
+saida/
+midia/
+
+# Configuração local com caminhos da sua máquina
+config.local.json
+
+# Gerados
+dist/
+node_modules/
+__pycache__/
+*.pyc
+.venv/

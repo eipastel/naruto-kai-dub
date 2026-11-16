@@ -1,0 +1,17 @@
+{
+  "kai": {
+    "s01e001": "D:/Midia/Naruto Kai/Naruto Kai 01.mkv"
+  },
+  "originais_dublados": {
+    "1": "D:/Midia/Naruto Dublado/Naruto 001.mkv",
+    "2": "D:/Midia/Naruto Dublado/Naruto 002.mkv",
+    "3": "D:/Midia/Naruto Dublado/Naruto 003.mkv",
+    "4": "D:/Midia/Naruto Dublado/Naruto 004.mkv",
+    "5": "D:/Midia/Naruto Dublado/Naruto 005.mkv",
+    "6": "D:/Midia/Naruto Dublado/Naruto 006.mkv"
+  },
+  "pasta_saida": "D:/Midia/Naruto Kai Dublado",
+  "filtro_kai": null,
+  "filtro_original": null,
+  "ajuste_origem_ms": {}
+}
