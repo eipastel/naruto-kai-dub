@@ -22,7 +22,7 @@
   ],
   "streams": [
     {
-      "url": "http://192.168.1.12:8642/Naruto%20Kai%20Dublado%20-%20E036.mp4"
+      "url": "https://192-168-1-12.local-ip.sh:8642/Naruto%20Kai%20Dublado%20-%20E036.mp4"
     }
   ]
 }

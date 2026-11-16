@@ -7,6 +7,9 @@ Use só na sua rede local, com arquivos gerados a partir das suas próprias míd
 import os
 import re
 import socket
+import ssl
+import time
+import urllib.request
 from http.server import SimpleHTTPRequestHandler, ThreadingHTTPServer
 from urllib.parse import quote
 
@@ -65,11 +68,32 @@ def ip_local():
             return "127.0.0.1"
 
 
-def servir(pasta, porta):
+CERTIFICADO = "https://local-ip.sh/"  # certificado Let's Encrypt para *.local-ip.sh (chave pública de propósito)
+
+
+def certificado(pasta):
+    """Baixa (ou renova, se tiver mais de 7 dias) o certificado do local-ip.sh."""
+    pasta.mkdir(parents=True, exist_ok=True)
+    for nome in ("server.pem", "server.key"):
+        arquivo = pasta / nome
+        if not arquivo.exists() or time.time() - arquivo.stat().st_mtime > 7 * 86400:
+            with urllib.request.urlopen(CERTIFICADO + nome, timeout=30) as resposta:
+                arquivo.write_bytes(resposta.read())
+    return pasta / "server.pem", pasta / "server.key"
+
+
+def servir(pasta, porta, https=True):
+    """Serve os MP4 da pasta. Com https, o endereço é https://192-168-x-x.local-ip.sh:porta,
+    porque o Stremio (web e TVs) bloqueia vídeo em http://."""
     pasta.mkdir(parents=True, exist_ok=True)
     ip = ip_local()
-    print(f"Servindo {pasta} em http://{ip}:{porta}/  (Ctrl+C para parar)", flush=True)
-    for arquivo in sorted(pasta.glob("*.mp4")):
-        print(f"  http://{ip}:{porta}/{quote(arquivo.name)}", flush=True)
+    base = f"https://{ip.replace('.', '-')}.local-ip.sh:{porta}" if https else f"http://{ip}:{porta}"
     handler = lambda *a, **k: ComRange(*a, directory=str(pasta), **k)  # noqa: E731
-    ThreadingHTTPServer(("0.0.0.0", porta), handler).serve_forever()
+    servidor = ThreadingHTTPServer(("0.0.0.0", porta), handler)
+    if https:
+        contexto = ssl.SSLContext(ssl.PROTOCOL_TLS_SERVER)
+        contexto.load_cert_chain(*certificado(pasta / ".certificado"))
+        servidor.socket = contexto.wrap_socket(servidor.socket, server_side=True)
+    print(f"Servindo {pasta} em {base}/  (Ctrl+C para parar)", flush=True)
+    print(f"No config.local.json, use: \"url_streams\": \"{base}\"", flush=True)
+    servidor.serve_forever()

@@ -5,7 +5,7 @@
   },
   "pasta_saida": "D:/Midia/Naruto Kai Dublado",
   "codificador": "h264_nvenc",
-  "url_streams": "http://192.168.0.10:8642",
+  "url_streams": "https://192-168-0-10.local-ip.sh:8642",
   "kai": {
     "s01e001": "D:/Midia/Naruto Kai/Naruto Kai 01.mkv"
   },

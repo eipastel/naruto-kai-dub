@@ -211,7 +211,7 @@ def cmd_montar(args):
 def cmd_servir(args):
     from .servidor import servir
     cfg = carregar_config()
-    servir(Path(args.pasta or cfg.get("pasta_saida", RAIZ / "saida")), args.porta)
+    servir(Path(args.pasta or cfg.get("pasta_saida", RAIZ / "saida")), args.porta, https=not args.http)
 
 
 def main(argv=None):
@@ -256,6 +256,7 @@ def main(argv=None):
     s = sub.add_parser("servir", help="serve os MP4 na rede local para a TV")
     s.add_argument("--pasta")
     s.add_argument("--porta", type=int, default=8642)
+    s.add_argument("--http", action="store_true", help="sem HTTPS (o Stremio web e o das TVs não tocam)")
     s.set_defaults(func=cmd_servir)
 
     args = p.parse_args(argv)
