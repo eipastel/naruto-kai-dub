@@ -20,5 +20,9 @@
       "motivo": "encerramento e prévia"
     }
   ],
-  "streams": []
+  "streams": [
+    {
+      "url": "https://192-168-1-12.local-ip.sh:8642/Naruto%20Kai%20Dublado%20-%20E107.mp4"
+    }
+  ]
 }
