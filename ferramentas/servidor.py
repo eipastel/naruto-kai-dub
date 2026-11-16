@@ -90,6 +90,7 @@ def servir(pasta, porta, https=True):
     base = f"https://{ip.replace('.', '-')}.local-ip.sh:{porta}" if https else f"http://{ip}:{porta}"
     handler = lambda *a, **k: ComRange(*a, directory=str(pasta), **k)  # noqa: E731
     servidor = ThreadingHTTPServer(("0.0.0.0", porta), handler)
+    servidor.handle_error = lambda *_: None  # o player fecha conexões ao avançar/voltar; não é erro
     if https:
         contexto = ssl.SSLContext(ssl.PROTOCOL_TLS_SERVER)
         contexto.load_cert_chain(*certificado(pasta / ".certificado"))
