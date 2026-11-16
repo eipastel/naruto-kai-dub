@@ -40,6 +40,29 @@ jobs:
         with:
           path: dist
 
+  espelho:
+    # Cópia no jsDelivr (certificado Sectigo): TVs antigas que não aceitam o certificado do GitHub Pages usam esta.
+    name: Espelhar no jsDelivr
+    needs: testes
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: npm run build
+      - name: Publicar dist/ na branch addon e limpar o cache do jsDelivr
+        working-directory: dist
+        run: |
+          git init -q -b addon
+          git add -A
+          git -c user.name=github-actions -c user.email=github-actions@users.noreply.github.com commit -qm "Complemento ${GITHUB_SHA::7}"
+          git push -fq "https://x-access-token:${{ github.token }}@github.com/${{ github.repository }}" addon
+          for f in $(git ls-files '*.json'); do curl -s -o /dev/null "https://purge.jsdelivr.net/gh/${{ github.repository }}@addon/$f"; done
+
   publicar:
     name: Publicar no GitHub Pages
     needs: testes
