@@ -1,0 +1,29 @@
+{
+  "temporada": 1,
+  "episodio": 8,
+  "original": 8,
+  "titulo": "Medo e coragem",
+  "sinopse": "Antes: Zabuza, um assassino da Névoa, apareceu e prendeu Kakashi numa prisão de água.",
+  "adicionado_em": "2026-11-16",
+  "miniatura": "https://episodes.metahub.space/tt0409591/1/8/w780.jpg",
+  "duracao_original": 1417.56,
+  "revisado": false,
+  "removidos": [
+    {
+      "inicio": 0.0,
+      "fim": 262.0,
+      "motivo": "abertura + recapitulação"
+    },
+    {
+      "inicio": 1294.75,
+      "fim": 1417.25,
+      "motivo": "encerramento e prévia"
+    }
+  ],
+  "streams": [
+    {
+      "url": "http://192.168.1.12:8642/Naruto%20Kai%20Dublado%20-%20E008.mp4",
+      "title": "E008 — O Juramento de Dor\n🇧🇷 Dublado · rede de casa"
+    }
+  ]
+}

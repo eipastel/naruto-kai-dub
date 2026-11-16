@@ -1,0 +1,24 @@
+{
+  "temporada": 1,
+  "episodio": 87,
+  "original": 87,
+  "titulo": "Balão d'água",
+  "sinopse": "Antes: a caminho de encontrar Tsunade, Jiraiya começou a ensinar uma técnica nova a Naruto.",
+  "adicionado_em": "2026-11-16",
+  "miniatura": "https://episodes.metahub.space/tt0409591/3/4/w780.jpg",
+  "duracao_original": 1419.95,
+  "revisado": false,
+  "removidos": [
+    {
+      "inicio": 7.0,
+      "fim": 97.75,
+      "motivo": "abertura + recapitulação"
+    },
+    {
+      "inicio": 1279.25,
+      "fim": 1419.75,
+      "motivo": "encerramento e prévia"
+    }
+  ],
+  "streams": []
+}

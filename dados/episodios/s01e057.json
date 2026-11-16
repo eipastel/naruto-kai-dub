@@ -1,0 +1,24 @@
+{
+  "temporada": 1,
+  "episodio": 57,
+  "original": 57,
+  "titulo": "O chefe dos sapos",
+  "sinopse": "Antes: Jiraiya jogou Naruto num abismo para forçá-lo a usar o chakra da raposa.",
+  "adicionado_em": "2026-11-16",
+  "miniatura": "https://episodes.metahub.space/tt0409591/2/22/w780.jpg",
+  "duracao_original": 1415.95,
+  "revisado": false,
+  "removidos": [
+    {
+      "inicio": 6.75,
+      "fim": 112.0,
+      "motivo": "abertura + recapitulação"
+    },
+    {
+      "inicio": 1278.75,
+      "fim": 1415.5,
+      "motivo": "encerramento e prévia"
+    }
+  ],
+  "streams": []
+}

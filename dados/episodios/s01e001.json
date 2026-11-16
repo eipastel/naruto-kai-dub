@@ -1,12 +1,24 @@
 {
   "temporada": 1,
   "episodio": 1,
-  "titulo": "Naruto Uzumaki!",
-  "sinopse": "Adapta o volume 1 do mangá. Naruto rouba o Pergaminho Selado, aprende o Jutsu Clones das Sombras e forma o Time 7 com Sasuke e Sakura, sob o comando de Kakashi.",
-  "capitulos_manga": "1–7",
+  "original": 1,
+  "titulo": "O garoto mais barulhento da vila",
+  "sinopse": "Konoha, a Vila da Folha. Um garoto encrenqueiro quer ser reconhecido por todos.",
   "adicionado_em": "2026-11-16",
-  "miniatura": null,
-  "originais": [1, 2, 3, 4, 5, 6],
-  "mapa": [],
-  "streams": []
+  "miniatura": "https://episodes.metahub.space/tt0409591/1/1/w780.jpg",
+  "duracao_original": 1416.23,
+  "revisado": false,
+  "removidos": [
+    {
+      "inicio": 1296.75,
+      "fim": 1416.0,
+      "motivo": "encerramento e prévia"
+    }
+  ],
+  "streams": [
+    {
+      "url": "http://192.168.1.12:8642/Naruto%20Kai%20Dublado%20-%20E001.mp4",
+      "title": "E001 — Naruto Uzumaki Chegando!\n🇧🇷 Dublado · rede de casa"
+    }
+  ]
 }

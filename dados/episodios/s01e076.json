@@ -1,0 +1,24 @@
+{
+  "temporada": 1,
+  "episodio": 76,
+  "original": 76,
+  "titulo": "Noite de lua",
+  "sinopse": "Antes: Sasuke chegou ao limite contra Gaara, e Naruto apareceu para ajudar.",
+  "adicionado_em": "2026-11-16",
+  "miniatura": "https://episodes.metahub.space/tt0409591/2/41/w780.jpg",
+  "duracao_original": 1418.12,
+  "revisado": false,
+  "removidos": [
+    {
+      "inicio": 0.0,
+      "fim": 95.0,
+      "motivo": "abertura"
+    },
+    {
+      "inicio": 1277.75,
+      "fim": 1418.0,
+      "motivo": "encerramento e prévia"
+    }
+  ],
+  "streams": []
+}

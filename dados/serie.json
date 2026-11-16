@@ -1,10 +1,20 @@
 {
   "id": "nkdub",
   "nome": "Naruto Kai Dublado",
-  "descricao": "Naruto Kai com dublagem brasileira: a história de Naruto sem fillers, recapitulações e enrolação, com o áudio em português do Brasil sincronizado trecho a trecho.\n\nProjeto de fã, sem fins lucrativos. Este complemento não hospeda vídeos nem áudios: ele apenas organiza episódios e aponta para fontes configuradas pelo próprio usuário.",
+  "descricao": "Naruto clássico dublado em português, no estilo Kai: só a história do mangá, sem fillers, aberturas, encerramentos, prévias e recapitulações.\n\nProjeto de fã, sem fins lucrativos. Este complemento não hospeda vídeos: ele organiza os episódios e aponta para fontes configuradas pelo próprio usuário.",
   "generos": ["Animação", "Ação", "Aventura"],
-  "ano": "2026–",
-  "temporadas": {
-    "1": "Mangá (volumes 1–72)"
-  }
+  "ano": "2002–2007",
+  "arte": {
+    "poster": "https://images.metahub.space/poster/medium/tt0409591/img",
+    "fundo": "https://images.metahub.space/background/medium/tt0409591/img",
+    "logo": "https://images.metahub.space/logo/medium/tt0409591/img"
+  },
+  "arcos": [
+    { "de": 1, "ate": 5, "nome": "Prólogo" },
+    { "de": 6, "ate": 19, "nome": "País das Ondas" },
+    { "de": 20, "ate": 67, "nome": "Exame Chunin" },
+    { "de": 68, "ate": 80, "nome": "Destruição de Konoha" },
+    { "de": 81, "ate": 100, "nome": "Busca por Tsunade" },
+    { "de": 107, "ate": 135, "nome": "Resgate do Sasuke" }
+  ]
 }

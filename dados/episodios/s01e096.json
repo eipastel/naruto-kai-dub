@@ -1,0 +1,24 @@
+{
+  "temporada": 1,
+  "episodio": 96,
+  "original": 96,
+  "titulo": "Batalha dos Sannins",
+  "sinopse": "Antes: Tsunade salvou Naruto e decidiu lutar de verdade.",
+  "adicionado_em": "2026-11-16",
+  "miniatura": "https://episodes.metahub.space/tt0409591/3/13/w780.jpg",
+  "duracao_original": 1419.76,
+  "revisado": false,
+  "removidos": [
+    {
+      "inicio": 9.25,
+      "fim": 90.75,
+      "motivo": "abertura"
+    },
+    {
+      "inicio": 1279.0,
+      "fim": 1419.75,
+      "motivo": "encerramento e prévia"
+    }
+  ],
+  "streams": []
+}

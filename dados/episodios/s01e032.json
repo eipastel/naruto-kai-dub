@@ -1,0 +1,28 @@
+{
+  "temporada": 1,
+  "episodio": 32,
+  "original": 32,
+  "titulo": "Raízes",
+  "sinopse": "Antes: com os garotos desacordados, Sakura teve que protegê-los, e Lee apareceu para ajudar.",
+  "adicionado_em": "2026-11-16",
+  "miniatura": "https://episodes.metahub.space/tt0409591/1/32/w780.jpg",
+  "duracao_original": 1420.83,
+  "revisado": false,
+  "removidos": [
+    {
+      "inicio": 0.0,
+      "fim": 126.25,
+      "motivo": "abertura + recapitulação"
+    },
+    {
+      "inicio": 1277.75,
+      "fim": 1420.5,
+      "motivo": "encerramento e prévia"
+    }
+  ],
+  "streams": [
+    {
+      "url": "http://192.168.1.12:8642/Naruto%20Kai%20Dublado%20-%20E032.mp4"
+    }
+  ]
+}

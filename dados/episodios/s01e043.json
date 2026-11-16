@@ -1,0 +1,24 @@
+{
+  "temporada": 1,
+  "episodio": 43,
+  "original": 43,
+  "titulo": "Sombras",
+  "sinopse": "Antes: a luta entre Sakura e Ino foi equilibrada do começo ao fim.",
+  "adicionado_em": "2026-11-16",
+  "miniatura": "https://episodes.metahub.space/tt0409591/2/8/w780.jpg",
+  "duracao_original": 1425.8,
+  "revisado": false,
+  "removidos": [
+    {
+      "inicio": 7.0,
+      "fim": 145.5,
+      "motivo": "abertura + recapitulação"
+    },
+    {
+      "inicio": 1279.5,
+      "fim": 1425.75,
+      "motivo": "encerramento e prévia"
+    }
+  ],
+  "streams": []
+}

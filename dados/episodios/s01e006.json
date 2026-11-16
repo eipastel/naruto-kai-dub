@@ -1,0 +1,29 @@
+{
+  "temporada": 1,
+  "episodio": 6,
+  "original": 6,
+  "titulo": "Uma missão de verdade",
+  "sinopse": "Antes: o Time 7 entendeu o valor do trabalho em equipe e foi aprovado.",
+  "adicionado_em": "2026-11-16",
+  "miniatura": "https://episodes.metahub.space/tt0409591/1/6/w780.jpg",
+  "duracao_original": 1416.66,
+  "revisado": false,
+  "removidos": [
+    {
+      "inicio": 0.0,
+      "fim": 95.0,
+      "motivo": "abertura"
+    },
+    {
+      "inicio": 1293.75,
+      "fim": 1416.5,
+      "motivo": "encerramento e prévia"
+    }
+  ],
+  "streams": [
+    {
+      "url": "http://192.168.1.12:8642/Naruto%20Kai%20Dublado%20-%20E006.mp4",
+      "title": "E006 — Uma Missão Perigosa: Uma Aventura no País das Ondas!\n🇧🇷 Dublado · rede de casa"
+    }
+  ]
+}

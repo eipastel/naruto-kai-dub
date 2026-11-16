@@ -1,0 +1,29 @@
+{
+  "temporada": 1,
+  "episodio": 18,
+  "original": 18,
+  "titulo": "O que é ser ninja",
+  "sinopse": "Antes: Haku contou a Naruto sua história e por quem ele luta.",
+  "adicionado_em": "2026-11-16",
+  "miniatura": "https://episodes.metahub.space/tt0409591/1/18/w780.jpg",
+  "duracao_original": 1435.46,
+  "revisado": false,
+  "removidos": [
+    {
+      "inicio": 0.0,
+      "fim": 95.0,
+      "motivo": "abertura"
+    },
+    {
+      "inicio": 1294.0,
+      "fim": 1435.25,
+      "motivo": "encerramento e prévia"
+    }
+  ],
+  "streams": [
+    {
+      "url": "http://192.168.1.12:8642/Naruto%20Kai%20Dublado%20-%20E018.mp4",
+      "title": "E018 — As Armas Conhecidas como Shinobi\n🇧🇷 Dublado · rede de casa"
+    }
+  ]
+}

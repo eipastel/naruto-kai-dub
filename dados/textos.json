@@ -1,0 +1,513 @@
+{
+ "sobre": "Títulos próprios, curtos e sem spoiler. A sinopse resume o episódio anterior do catálogo (fillers pulados), nunca o atual.",
+ "episodios": {
+  "1": {
+   "titulo": "O garoto mais barulhento da vila",
+   "sinopse": "Konoha, a Vila da Folha. Um garoto encrenqueiro quer ser reconhecido por todos."
+  },
+  "2": {
+   "titulo": "Um fã inesperado",
+   "sinopse": "Antes: Naruto finalmente ganhou sua bandana de ninja, graças ao Iruka."
+  },
+  "3": {
+   "titulo": "Rivais de sala",
+   "sinopse": "Antes: Naruto ganhou um aprendiz meio atrapalhado, o Konohamaru."
+  },
+  "4": {
+   "titulo": "O professor atrasado",
+   "sinopse": "Antes: os times foram formados, e Naruto caiu com Sasuke e Sakura."
+  },
+  "5": {
+   "titulo": "Hora do almoço",
+   "sinopse": "Antes: Kakashi desafiou o Time 7 a tirar dois guizos dele."
+  },
+  "6": {
+   "titulo": "Uma missão de verdade",
+   "sinopse": "Antes: o Time 7 entendeu o valor do trabalho em equipe e foi aprovado."
+  },
+  "7": {
+   "titulo": "Neblina no caminho",
+   "sinopse": "Antes: o Time 7 saiu da vila para escoltar um construtor de pontes."
+  },
+  "8": {
+   "titulo": "Medo e coragem",
+   "sinopse": "Antes: Zabuza, um assassino da Névoa, apareceu e prendeu Kakashi numa prisão de água."
+  },
+  "9": {
+   "titulo": "O olho que copia",
+   "sinopse": "Antes: Naruto e Sasuke se uniram num plano para libertar Kakashi."
+  },
+  "10": {
+   "titulo": "Subindo em árvores",
+   "sinopse": "Antes: Kakashi enfrentou Zabuza, mas um ninja mascarado levou o corpo do inimigo."
+  },
+  "11": {
+   "titulo": "Uma vila sem esperança",
+   "sinopse": "Antes: desconfiado, Kakashi começou a treinar o time para controlar o chakra."
+  },
+  "12": {
+   "titulo": "Encontro na floresta",
+   "sinopse": "Antes: o time conheceu a família de Tazuna e a história de um herói da vila."
+  },
+  "13": {
+   "titulo": "Espelhos de gelo",
+   "sinopse": "Antes: Zabuza voltou, e a ponte quase pronta virou campo de batalha."
+  },
+  "14": {
+   "titulo": "Chegada barulhenta",
+   "sinopse": "Antes: Sasuke ficou preso nos espelhos de gelo de um ninja misterioso."
+  },
+  "15": {
+   "titulo": "Sem saída",
+   "sinopse": "Antes: Naruto entrou na briga, mas acabou preso nos espelhos junto com Sasuke."
+  },
+  "16": {
+   "titulo": "Fúria",
+   "sinopse": "Antes: Sasuke começou a enxergar os movimentos do inimigo, mas a situação ficou crítica."
+  },
+  "17": {
+   "titulo": "Um sonho simples",
+   "sinopse": "Antes: Naruto liberou um poder assustador contra Haku."
+  },
+  "18": {
+   "titulo": "O que é ser ninja",
+   "sinopse": "Antes: Haku contou a Naruto sua história e por quem ele luta."
+  },
+  "19": {
+   "titulo": "O nome da ponte",
+   "sinopse": "Antes: Haku se colocou na frente do golpe de Kakashi para proteger Zabuza."
+  },
+  "20": {
+   "titulo": "Visitantes da Areia",
+   "sinopse": "Antes: a missão no País das Ondas terminou, e a ponte ganhou um nome especial."
+  },
+  "21": {
+   "titulo": "Inscrições abertas",
+   "sinopse": "Antes: três ninjas da Vila da Areia chegaram a Konoha para o Exame Chunin."
+  },
+  "22": {
+   "titulo": "O desafio do sobrancelhudo",
+   "sinopse": "Antes: Kakashi inscreveu o Time 7 no Exame Chunin."
+  },
+  "23": {
+   "titulo": "Sala lotada",
+   "sinopse": "Antes: Rock Lee desafiou Sasuke e mostrou uma velocidade impressionante."
+  },
+  "24": {
+   "titulo": "Prova escrita",
+   "sinopse": "Antes: os novatos da Folha se reuniram e conheceram Kabuto, um veterano do exame."
+  },
+  "25": {
+   "titulo": "A última pergunta",
+   "sinopse": "Antes: a primeira etapa começou com uma prova feita para testar quem cola sem ser pego."
+  },
+  "27": {
+   "titulo": "Floresta da Morte",
+   "sinopse": "Antes: Naruto não desistiu da décima pergunta, e o Time 7 passou na primeira etapa."
+  },
+  "28": {
+   "titulo": "Impostor",
+   "sinopse": "Antes: a segunda etapa começou numa floresta perigosa, com uma disputa por pergaminhos."
+  },
+  "29": {
+   "titulo": "Não vou fugir",
+   "sinopse": "Antes: um ninja estranho e muito poderoso cercou o Time 7."
+  },
+  "30": {
+   "titulo": "Olhos de fogo",
+   "sinopse": "Antes: Naruto se recusou a entregar o pergaminho e enfrentou o inimigo."
+  },
+  "31": {
+   "titulo": "Sozinha",
+   "sinopse": "Antes: o inimigo, Orochimaru, deixou uma marca no pescoço de Sasuke antes de sumir."
+  },
+  "32": {
+   "titulo": "Raízes",
+   "sinopse": "Antes: com os garotos desacordados, Sakura teve que protegê-los, e Lee apareceu para ajudar."
+  },
+  "33": {
+   "titulo": "Trio de reforço",
+   "sinopse": "Antes: Sakura deixou o medo para trás e lutou com tudo."
+  },
+  "34": {
+   "titulo": "O que Kiba viu",
+   "sinopse": "Antes: Ino, Shikamaru e Choji entraram na briga para ajudar Sakura."
+  },
+  "35": {
+   "titulo": "Não abra o pergaminho",
+   "sinopse": "Antes: Sasuke acordou com um poder estranho e afugentou os ninjas do Som."
+  },
+  "36": {
+   "titulo": "Uma noite inteira",
+   "sinopse": "Antes: o tempo apertou, e Kabuto reapareceu para ajudar o Time 7."
+  },
+  "37": {
+   "titulo": "A torre",
+   "sinopse": "Antes: com a ajuda de Kabuto, o Time 7 conseguiu o pergaminho que faltava."
+  },
+  "38": {
+   "titulo": "Um contra um",
+   "sinopse": "Antes: o Time 7 chegou à torre a tempo, e os novatos se reencontraram."
+  },
+  "39": {
+   "titulo": "Movimento emprestado",
+   "sinopse": "Antes: começaram as lutas preliminares, e Sasuke foi chamado primeiro, mesmo com a marca doendo."
+  },
+  "40": {
+   "titulo": "Visita indesejada",
+   "sinopse": "Antes: Sasuke venceu a primeira luta com um golpe inspirado em Lee."
+  },
+  "41": {
+   "titulo": "Amigas e rivais",
+   "sinopse": "Antes: Kakashi selou a marca de Sasuke e encarou Orochimaru."
+  },
+  "42": {
+   "titulo": "Até o fim",
+   "sinopse": "Antes: Sakura e Ino, antigas amigas, foram sorteadas uma contra a outra."
+  },
+  "43": {
+   "titulo": "Sombras",
+   "sinopse": "Antes: a luta entre Sakura e Ino foi equilibrada do começo ao fim."
+  },
+  "44": {
+   "titulo": "Faro de cachorro",
+   "sinopse": "Antes: Shikamaru usou a cabeça para vencer quase sem esforço."
+  },
+  "45": {
+   "titulo": "Arma secreta",
+   "sinopse": "Antes: Kiba e Akamaru dominaram Naruto no começo da luta."
+  },
+  "46": {
+   "titulo": "Primos",
+   "sinopse": "Antes: Naruto venceu Kiba com uma jogada inesperada."
+  },
+  "47": {
+   "titulo": "Destino",
+   "sinopse": "Antes: Hinata ganhou coragem para enfrentar o primo Neji."
+  },
+  "48": {
+   "titulo": "Areia e velocidade",
+   "sinopse": "Antes: Neji mostrou toda a sua frieza contra Hinata."
+  },
+  "49": {
+   "titulo": "Os portões",
+   "sinopse": "Antes: Lee tirou os pesos das pernas e começou a pressionar Gaara."
+  },
+  "50": {
+   "titulo": "Até o limite",
+   "sinopse": "Antes: Lee abriu os portões internos, uma técnica muito arriscada."
+  },
+  "51": {
+   "titulo": "Visita no hospital",
+   "sinopse": "Antes: Lee deu tudo de si contra Gaara, e o resultado foi duro."
+  },
+  "52": {
+   "titulo": "Novo professor",
+   "sinopse": "Antes: as preliminares terminaram, e as finais ficaram marcadas para dali a um mês."
+  },
+  "53": {
+   "titulo": "O sábio pervertido",
+   "sinopse": "Antes: Ebisu começou a ensinar Naruto a andar sobre a água."
+  },
+  "54": {
+   "titulo": "Invocação",
+   "sinopse": "Antes: Naruto convenceu Jiraiya, um dos Sannins, a treiná-lo."
+  },
+  "55": {
+   "titulo": "Flores",
+   "sinopse": "Antes: Naruto começou a invocar sapos, mas só saíram girinos."
+  },
+  "56": {
+   "titulo": "Queda livre",
+   "sinopse": "Antes: Sakura visitou Lee, que não quer desistir apesar dos ferimentos."
+  },
+  "57": {
+   "titulo": "O chefe dos sapos",
+   "sinopse": "Antes: Jiraiya jogou Naruto num abismo para forçá-lo a usar o chakra da raposa."
+  },
+  "58": {
+   "titulo": "Perigo no hospital",
+   "sinopse": "Antes: Naruto invocou o sapo gigante Gamabunta e conquistou seu respeito."
+  },
+  "59": {
+   "titulo": "Correndo para a arena",
+   "sinopse": "Antes: Gaara tentou atacar Lee no hospital, e Naruto e Shikamaru o impediram."
+  },
+  "60": {
+   "titulo": "Frente a frente",
+   "sinopse": "Antes: chegou o dia das finais, e Naruto quase se atrasou."
+  },
+  "61": {
+   "titulo": "Defesa perfeita",
+   "sinopse": "Antes: Naruto encarou Neji com uma multidão de clones."
+  },
+  "62": {
+   "titulo": "O azarão",
+   "sinopse": "Antes: Neji parecia imbatível, mas Naruto se recusou a desistir."
+  },
+  "63": {
+   "titulo": "Esperando Sasuke",
+   "sinopse": "Antes: Naruto venceu Neji e mudou o jeito dele de ver o destino."
+  },
+  "64": {
+   "titulo": "Preguiça estratégica",
+   "sinopse": "Antes: Neji descobriu a verdade sobre o pai, e Kankuro desistiu da luta contra Shino."
+  },
+  "65": {
+   "titulo": "A chegada",
+   "sinopse": "Antes: Shikamaru montou um plano brilhante contra Temari, mas desistiu no fim."
+  },
+  "66": {
+   "titulo": "Velocidade nova",
+   "sinopse": "Antes: Sasuke chegou com Kakashi bem na hora da luta contra Gaara."
+  },
+  "67": {
+   "titulo": "Um golpe novo",
+   "sinopse": "Antes: Sasuke mostrou uma velocidade nova, e Gaara se fechou numa esfera de areia."
+  },
+  "68": {
+   "titulo": "Hora zero",
+   "sinopse": "Antes: Sasuke feriu Gaara com o Chidori, e uma ilusão fez a arena inteira dormir."
+  },
+  "69": {
+   "titulo": "Missão urgente",
+   "sinopse": "Antes: a Areia e o Som invadiram Konoha, e Orochimaru cercou o Terceiro Hokage."
+  },
+  "70": {
+   "titulo": "Ficar para trás",
+   "sinopse": "Antes: Naruto, Sakura e Shikamaru receberam a missão de alcançar Sasuke."
+  },
+  "71": {
+   "titulo": "Hokage contra Hokage",
+   "sinopse": "Antes: Shikamaru ficou para trás para segurar os perseguidores."
+  },
+  "72": {
+   "titulo": "Velhas lembranças",
+   "sinopse": "Antes: Orochimaru trouxe de volta os dois primeiros Hokages para enfrentar o Terceiro."
+  },
+  "73": {
+   "titulo": "O preço de um selo",
+   "sinopse": "Antes: Sasuke alcançou Gaara, e o Terceiro preparou uma técnica proibida."
+  },
+  "74": {
+   "titulo": "Quem é Gaara",
+   "sinopse": "Antes: o Terceiro começou a selar Orochimaru, e Shino ficou para enfrentar Kankuro."
+  },
+  "75": {
+   "titulo": "Pressão",
+   "sinopse": "Antes: Gaara começou a se transformar em algo monstruoso."
+  },
+  "76": {
+   "titulo": "Noite de lua",
+   "sinopse": "Antes: Sasuke chegou ao limite contra Gaara, e Naruto apareceu para ajudar."
+  },
+  "77": {
+   "titulo": "Duas solidões",
+   "sinopse": "Antes: Gaara relembrou a infância solitária e prendeu Sakura numa árvore com areia."
+  },
+  "78": {
+   "titulo": "Gigantes",
+   "sinopse": "Antes: Naruto entendeu que ele e Gaara cresceram com a mesma solidão."
+  },
+  "79": {
+   "titulo": "Além do limite",
+   "sinopse": "Antes: Gaara despertou o Shukaku, e Naruto invocou Gamabunta."
+  },
+  "80": {
+   "titulo": "Chuva em Konoha",
+   "sinopse": "Antes: Naruto e Gaara gastaram até a última gota de chakra."
+  },
+  "81": {
+   "titulo": "Visitantes de preto",
+   "sinopse": "Antes: a invasão acabou, e Konoha se despediu do Terceiro Hokage."
+  },
+  "82": {
+   "titulo": "Olhos iguais",
+   "sinopse": "Antes: dois ninjas da Akatsuki entraram em Konoha, e um deles é Itachi Uchiha."
+  },
+  "83": {
+   "titulo": "Viagem com o sábio",
+   "sinopse": "Antes: Itachi derrubou Kakashi com uma ilusão terrível."
+  },
+  "84": {
+   "titulo": "Reencontro",
+   "sinopse": "Antes: Naruto saiu de viagem com Jiraiya, sem saber que estava sendo seguido."
+  },
+  "85": {
+   "titulo": "O último Uchiha",
+   "sinopse": "Antes: Sasuke encontrou o irmão Itachi frente a frente."
+  },
+  "86": {
+   "titulo": "Novo treino",
+   "sinopse": "Antes: Itachi derrotou Sasuke com facilidade, e Jiraiya chegou para proteger Naruto."
+  },
+  "87": {
+   "titulo": "Balão d'água",
+   "sinopse": "Antes: a caminho de encontrar Tsunade, Jiraiya começou a ensinar uma técnica nova a Naruto."
+  },
+  "88": {
+   "titulo": "Na trilha de Tsunade",
+   "sinopse": "Antes: Naruto aprendeu a girar o chakra estourando balões d'água."
+  },
+  "89": {
+   "titulo": "Uma proposta difícil",
+   "sinopse": "Antes: Naruto treinava sem parar, e Orochimaru encontrou Tsunade primeiro."
+  },
+  "90": {
+   "titulo": "Respeito",
+   "sinopse": "Antes: Orochimaru ofereceu a Tsunade trazer de volta quem ela perdeu, em troca de uma cura."
+  },
+  "91": {
+   "titulo": "Uma aposta",
+   "sinopse": "Antes: Naruto conheceu Tsunade e brigou com ela por desdenhar dos Hokages."
+  },
+  "92": {
+   "titulo": "Escolha",
+   "sinopse": "Antes: Tsunade apostou seu colar que Naruto não dominaria a técnica em uma semana."
+  },
+  "93": {
+   "titulo": "Acordo desfeito",
+   "sinopse": "Antes: Tsunade drogou Jiraiya e foi ao encontro de Orochimaru."
+  },
+  "94": {
+   "titulo": "Espiral",
+   "sinopse": "Antes: Tsunade desistiu do acordo e passou a lutar contra Kabuto."
+  },
+  "95": {
+   "titulo": "Aposta de vida",
+   "sinopse": "Antes: Naruto acertou Kabuto com o Rasengan, mas ficou gravemente ferido."
+  },
+  "96": {
+   "titulo": "Batalha dos Sannins",
+   "sinopse": "Antes: Tsunade salvou Naruto e decidiu lutar de verdade."
+  },
+  "98": {
+   "titulo": "Volta para casa",
+   "sinopse": "Antes: os três Sannins se enfrentaram com invocações gigantes, e Orochimaru recuou."
+  },
+  "99": {
+   "titulo": "Vontade do Fogo",
+   "sinopse": "Antes: Tsunade voltou a Konoha e curou Kakashi e Sasuke, mas o caso de Lee é arriscado."
+  },
+  "100": {
+   "titulo": "Mestre e aluno",
+   "sinopse": "Antes: Konohamaru aprendeu com Tsunade o que significa proteger a vila."
+  },
+  "107": {
+   "titulo": "No telhado",
+   "sinopse": "Antes: Tsunade virou a Quinta Hokage, e Lee decidiu arriscar a cirurgia."
+  },
+  "108": {
+   "titulo": "Laços",
+   "sinopse": "Antes: frustrado, Sasuke desafiou Naruto para uma luta no telhado do hospital."
+  },
+  "109": {
+   "titulo": "Um convite",
+   "sinopse": "Antes: Kakashi interrompeu a luta e tentou trazer Sasuke de volta à razão."
+  },
+  "110": {
+   "titulo": "O time de resgate",
+   "sinopse": "Antes: o Quarteto do Som convidou Sasuke a ir até Orochimaru, e ele deixou a vila."
+  },
+  "111": {
+   "titulo": "Na pista",
+   "sinopse": "Antes: Shikamaru montou um time com Naruto, Kiba, Choji e Neji para trazer Sasuke de volta."
+  },
+  "112": {
+   "titulo": "Presos",
+   "sinopse": "Antes: o time alcançou o Quarteto do Som e caiu numa armadilha."
+  },
+  "113": {
+   "titulo": "Choji",
+   "sinopse": "Antes: o time ficou preso numa cúpula de terra que suga chakra."
+  },
+  "114": {
+   "titulo": "Amigo de verdade",
+   "sinopse": "Antes: Choji ficou para trás para enfrentar Jirobo sozinho."
+  },
+  "115": {
+   "titulo": "Teias",
+   "sinopse": "Antes: Choji usou tudo o que tinha para vencer Jirobo."
+  },
+  "116": {
+   "titulo": "Ponto cego",
+   "sinopse": "Antes: Neji ficou para enfrentar Kidomaru, o ninja das teias."
+  },
+  "117": {
+   "titulo": "Não posso perder",
+   "sinopse": "Antes: Kidomaru descobriu o ponto cego do Byakugan de Neji."
+  },
+  "118": {
+   "titulo": "Corrida contra o tempo",
+   "sinopse": "Antes: Neji venceu Kidomaru, mas ficou muito ferido."
+  },
+  "119": {
+   "titulo": "Reviravolta",
+   "sinopse": "Antes: Naruto, Shikamaru e Kiba recuperaram o barril onde estava Sasuke."
+  },
+  "120": {
+   "titulo": "Uivos",
+   "sinopse": "Antes: o time se dividiu, e Kimimaro levou o barril com Sasuke."
+  },
+  "121": {
+   "titulo": "Cada um na sua luta",
+   "sinopse": "Antes: Kiba e Akamaru apostaram tudo contra os irmãos Sakon e Ukon."
+  },
+  "122": {
+   "titulo": "Distração",
+   "sinopse": "Antes: Kiba fugiu ferido, e Shikamaru ficou encurralado por Tayuya."
+  },
+  "123": {
+   "titulo": "Uma chegada inesperada",
+   "sinopse": "Antes: Shikamaru quebrou o próprio dedo para escapar de uma ilusão."
+  },
+  "124": {
+   "titulo": "Punho cambaleante",
+   "sinopse": "Antes: Sasuke saiu do barril, e Lee chegou para enfrentar Kimimaro."
+  },
+  "125": {
+   "titulo": "Aliados",
+   "sinopse": "Antes: Lee lutou com tudo, e Shikamaru e Kiba chegaram ao limite."
+  },
+  "126": {
+   "titulo": "Areia contra osso",
+   "sinopse": "Antes: os ninjas da Areia chegaram para ajudar a Folha."
+  },
+  "127": {
+   "titulo": "Floresta de ossos",
+   "sinopse": "Antes: Gaara enfrentou Kimimaro, um inimigo que não desiste."
+  },
+  "128": {
+   "titulo": "Vale do Fim",
+   "sinopse": "Antes: Kimimaro caiu, e Naruto seguiu sozinho atrás de Sasuke."
+  },
+  "129": {
+   "titulo": "Irmãos",
+   "sinopse": "Antes: Naruto alcançou Sasuke, e a luta entre os dois começou."
+  },
+  "130": {
+   "titulo": "O emblema",
+   "sinopse": "Antes: Sasuke relembrou a infância ao lado de Itachi."
+  },
+  "131": {
+   "titulo": "Segredos do Sharingan",
+   "sinopse": "Antes: Sasuke relembrou o pai e a noite em que o clã foi destruído."
+  },
+  "132": {
+   "titulo": "Por um amigo",
+   "sinopse": "Antes: Sasuke lembrou do que Itachi disse sobre o verdadeiro poder do Sharingan."
+  },
+  "133": {
+   "titulo": "Apelo",
+   "sinopse": "Antes: Naruto deixou o chakra da raposa tomar conta para não perder o amigo."
+  },
+  "134": {
+   "titulo": "Chuva no vale",
+   "sinopse": "Antes: Naruto e Sasuke foram com tudo, um contra o outro."
+  },
+  "135": {
+   "titulo": "Uma promessa",
+   "sinopse": "Antes: a luta no Vale do Fim terminou, e Kakashi chegou tarde demais."
+  }
+ }
+}

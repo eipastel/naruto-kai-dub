@@ -1,0 +1,24 @@
+{
+  "temporada": 1,
+  "episodio": 60,
+  "original": 60,
+  "titulo": "Frente a frente",
+  "sinopse": "Antes: chegou o dia das finais, e Naruto quase se atrasou.",
+  "adicionado_em": "2026-11-16",
+  "miniatura": "https://episodes.metahub.space/tt0409591/2/25/w780.jpg",
+  "duracao_original": 1416.23,
+  "revisado": false,
+  "removidos": [
+    {
+      "inicio": 0.0,
+      "fim": 149.25,
+      "motivo": "abertura + recapitulação"
+    },
+    {
+      "inicio": 1279.25,
+      "fim": 1416.0,
+      "motivo": "encerramento e prévia"
+    }
+  ],
+  "streams": []
+}

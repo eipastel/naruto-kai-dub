@@ -1,0 +1,24 @@
+{
+  "temporada": 1,
+  "episodio": 52,
+  "original": 52,
+  "titulo": "Novo professor",
+  "sinopse": "Antes: as preliminares terminaram, e as finais ficaram marcadas para dali a um mês.",
+  "adicionado_em": "2026-11-16",
+  "miniatura": "https://episodes.metahub.space/tt0409591/2/17/w780.jpg",
+  "duracao_original": 1422.22,
+  "revisado": false,
+  "removidos": [
+    {
+      "inicio": 0.0,
+      "fim": 166.75,
+      "motivo": "abertura + recapitulação"
+    },
+    {
+      "inicio": 1294.0,
+      "fim": 1422.0,
+      "motivo": "encerramento e prévia"
+    }
+  ],
+  "streams": []
+}

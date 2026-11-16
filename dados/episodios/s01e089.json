@@ -1,0 +1,24 @@
+{
+  "temporada": 1,
+  "episodio": 89,
+  "original": 89,
+  "titulo": "Uma proposta difícil",
+  "sinopse": "Antes: Naruto treinava sem parar, e Orochimaru encontrou Tsunade primeiro.",
+  "adicionado_em": "2026-11-16",
+  "miniatura": "https://episodes.metahub.space/tt0409591/3/6/w780.jpg",
+  "duracao_original": 1418.69,
+  "revisado": false,
+  "removidos": [
+    {
+      "inicio": 7.0,
+      "fim": 101.0,
+      "motivo": "abertura"
+    },
+    {
+      "inicio": 1278.0,
+      "fim": 1418.25,
+      "motivo": "encerramento e prévia"
+    }
+  ],
+  "streams": []
+}

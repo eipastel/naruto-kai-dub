@@ -1,0 +1,24 @@
+{
+  "temporada": 1,
+  "episodio": 110,
+  "original": 110,
+  "titulo": "O time de resgate",
+  "sinopse": "Antes: o Quarteto do Som convidou Sasuke a ir até Orochimaru, e ele deixou a vila.",
+  "adicionado_em": "2026-11-16",
+  "miniatura": "https://episodes.metahub.space/tt0409591/3/27/w780.jpg",
+  "duracao_original": 1413.91,
+  "revisado": false,
+  "removidos": [
+    {
+      "inicio": 0.0,
+      "fim": 106.0,
+      "motivo": "abertura + recapitulação"
+    },
+    {
+      "inicio": 1244.5,
+      "fim": 1413.5,
+      "motivo": "encerramento e prévia"
+    }
+  ],
+  "streams": []
+}

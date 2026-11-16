@@ -1,0 +1,28 @@
+{
+  "temporada": 1,
+  "episodio": 37,
+  "original": 37,
+  "titulo": "A torre",
+  "sinopse": "Antes: com a ajuda de Kabuto, o Time 7 conseguiu o pergaminho que faltava.",
+  "adicionado_em": "2026-11-16",
+  "miniatura": "https://episodes.metahub.space/tt0409591/2/2/w780.jpg",
+  "duracao_original": 1418.6,
+  "revisado": false,
+  "removidos": [
+    {
+      "inicio": 0.0,
+      "fim": 147.25,
+      "motivo": "abertura + recapitulação"
+    },
+    {
+      "inicio": 1277.25,
+      "fim": 1418.25,
+      "motivo": "encerramento e prévia"
+    }
+  ],
+  "streams": [
+    {
+      "url": "http://192.168.1.12:8642/Naruto%20Kai%20Dublado%20-%20E037.mp4"
+    }
+  ]
+}

@@ -3,41 +3,106 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Naruto Kai Dublado — complemento Stremio</title>
-  <meta name="description" content="Naruto Kai com dublagem brasileira no Stremio, inclusive em Smart TVs LG.">
-  <link rel="icon" href="assets/logo.png">
+  <title>Naruto Kai Dublado</title>
+  <meta name="description" content="{{DESCRICAO}}">
+  <meta property="og:title" content="Naruto Kai Dublado — complemento Stremio">
+  <meta property="og:description" content="{{DESCRICAO}}">
+  <meta property="og:image" content="{{FUNDO}}">
+  <link rel="icon" href="{{POSTER}}">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
   <style>
-    :root { --fundo: #14110f; --cartao: #211c18; --texto: #f3ece4; --suave: #b9ab9c; --laranja: #f2701c; }
+    :root { --fundo: #0f0c0a; --cartao: #1b1612; --linha: #2c241d; --texto: #f6efe7; --suave: #b3a493; --laranja: #f47216; --laranja2: #ff9a3c; }
     * { box-sizing: border-box; }
-    body { margin: 0; font: 16px/1.6 system-ui, sans-serif; color: var(--texto); background: var(--fundo) url(assets/fundo.png) center top / cover fixed; }
-    main { max-width: 720px; margin: 0 auto; padding: 48px 16px; }
-    .cartao { background: color-mix(in srgb, var(--cartao) 92%, transparent); border-radius: 16px; padding: 28px; }
-    h1 { margin: 0 0 4px; font-size: 2rem; }
-    p { color: var(--suave); }
-    .botao { display: inline-block; background: var(--laranja); color: #fff; font-weight: 700; padding: 14px 22px; border-radius: 10px; text-decoration: none; }
-    code { display: block; overflow-wrap: anywhere; background: #0004; padding: 10px 12px; border-radius: 8px; margin: 8px 0 0; }
-    li { margin: 6px 0; }
-    .pendente { color: var(--suave); font-size: .85em; }
-    footer { font-size: .85em; color: var(--suave); margin-top: 24px; }
+    body { margin: 0; font: 16px/1.6 Inter, system-ui, sans-serif; color: var(--texto); background: var(--fundo); }
+    a { color: var(--laranja2); }
+    .heroi { position: relative; min-height: 78vh; display: grid; align-items: end; padding: 48px 16px; overflow: hidden; }
+    .heroi::before { content: ""; position: absolute; inset: 0; background: url("{{FUNDO}}") center / cover; transform: scale(1.03); }
+    .heroi::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, #0f0c0a33 0%, #0f0c0acc 60%, var(--fundo) 100%), linear-gradient(90deg, #0f0c0aee 0%, #0f0c0a00 70%); }
+    .conteudo { position: relative; z-index: 1; max-width: 1100px; margin: 0 auto; width: 100%; display: flex; gap: 32px; align-items: flex-end; }
+    .poster { width: 210px; border-radius: 12px; box-shadow: 0 20px 50px #000a; flex: none; }
+    .logo { max-width: 360px; width: 100%; display: block; margin-bottom: 4px; }
+    h1 { font: 400 clamp(2.6rem, 6vw, 4.4rem)/1 "Bebas Neue", sans-serif; letter-spacing: .02em; margin: 0 0 12px; }
+    h1 span { color: var(--laranja); }
+    .selos { display: flex; flex-wrap: wrap; gap: 8px; margin: 0 0 16px; padding: 0; list-style: none; }
+    .selos li { background: #ffffff14; border: 1px solid #ffffff22; padding: 4px 10px; border-radius: 999px; font-size: .85rem; }
+    .resumo { color: #e3d6c7; max-width: 620px; margin: 0 0 22px; }
+    .acoes { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; }
+    .botao { background: linear-gradient(135deg, var(--laranja), var(--laranja2)); color: #1a0d03; font-weight: 700; padding: 14px 24px; border-radius: 10px; text-decoration: none; box-shadow: 0 8px 24px #f4721655; }
+    .botao:hover { filter: brightness(1.08); }
+    main { max-width: 1100px; margin: 0 auto; padding: 8px 16px 64px; }
+    .instalar { background: var(--cartao); border: 1px solid var(--linha); border-radius: 14px; padding: 20px; margin: -8px 0 40px; }
+    .instalar h2 { margin-top: 0; }
+    .copiar { display: flex; gap: 8px; }
+    .copiar code { flex: 1; overflow-wrap: anywhere; background: #0006; border: 1px solid var(--linha); padding: 10px 12px; border-radius: 8px; }
+    .copiar button { background: var(--linha); color: var(--texto); border: 0; border-radius: 8px; padding: 0 16px; font: inherit; cursor: pointer; }
+    .passos { color: var(--suave); padding-left: 20px; margin-bottom: 0; }
+    h2 { font: 400 2rem/1 "Bebas Neue", sans-serif; letter-spacing: .03em; }
+    .contagem { color: var(--suave); margin-top: -8px; }
+    .grade { list-style: none; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 16px; }
+    .ep { background: var(--cartao); border: 1px solid var(--linha); border-radius: 12px; overflow: hidden; position: relative; display: flex; flex-direction: column; }
+    .ep img { width: 100%; aspect-ratio: 16 / 9; object-fit: cover; background: #000; }
+    .ep .num { position: absolute; top: 8px; left: 8px; background: #000b; padding: 2px 8px; border-radius: 6px; font-size: .8rem; font-weight: 700; }
+    .ep strong { padding: 10px 12px 0; font-size: .95rem; line-height: 1.35; }
+    .ep small { padding: 4px 12px 12px; color: var(--suave); }
+    .ep.pendente img { filter: grayscale(1) brightness(.6); }
+    .ep.pendente::after { content: "em preparação"; position: absolute; top: 8px; right: 8px; background: #000b; color: var(--suave); padding: 2px 8px; border-radius: 6px; font-size: .75rem; }
+    footer { color: var(--suave); font-size: .85rem; border-top: 1px solid var(--linha); padding-top: 20px; margin-top: 40px; }
+    @media (max-width: 640px) {
+      .poster { display: none; }
+      .heroi { min-height: 64vh; }
+      .copiar { flex-direction: column; }
+      .copiar button { padding: 10px; }
+    }
   </style>
 </head>
 <body>
-  <main>
-    <div class="cartao">
-      <h1>Naruto Kai Dublado</h1>
-      <p>Naruto sem fillers e com a dublagem brasileira, direto no Stremio — no computador, no celular e na Smart TV LG.</p>
-      <p><a class="botao" href="{{STREMIO}}">Instalar no Stremio</a></p>
-      <p>Na TV ou se o botão não funcionar, cole este endereço na busca de complementos do Stremio:</p>
-      <code>{{MANIFESTO}}</code>
-      <h2>Episódios</h2>
-      <ul>
-        {{EPISODIOS}}
-      </ul>
-      <footer>
-        Versão {{VERSAO}} · Projeto de fã, sem fins lucrativos. Este complemento não hospeda vídeos nem áudios.
-        · <a href="https://github.com/eipastel/naruto-kai-dub" style="color:inherit">Código no GitHub</a>
-      </footer>
+  <header class="heroi">
+    <div class="conteudo">
+      <img class="poster" src="{{POSTER}}" alt="Pôster de Naruto">
+      <div>
+        <img class="logo" src="{{LOGO}}" alt="Naruto">
+        <h1>Kai <span>Dublado</span></h1>
+        <ul class="selos">
+          <li>🇧🇷 Dublagem brasileira</li>
+          <li>Sem fillers</li>
+          <li>Sem abertura e recapitulação</li>
+          <li>Smart TV LG</li>
+        </ul>
+        <p class="resumo">{{DESCRICAO}}</p>
+        <div class="acoes">
+          <a class="botao" href="{{STREMIO}}">Instalar no Stremio</a>
+          <a href="https://github.com/eipastel/naruto-kai-dub">Código no GitHub</a>
+        </div>
+      </div>
     </div>
+  </header>
+
+  <main>
+    <section class="instalar">
+      <h2>Instalar na TV ou no celular</h2>
+      <div class="copiar">
+        <code id="manifesto">{{MANIFESTO}}</code>
+        <button type="button" onclick="navigator.clipboard.writeText(document.getElementById('manifesto').textContent).then(() => this.textContent = 'Copiado!')">Copiar</button>
+      </div>
+      <ol class="passos">
+        <li>Abra o Stremio e vá em <strong>Complementos</strong>.</li>
+        <li>Cole o endereço acima na busca e toque em <strong>Instalar</strong>.</li>
+        <li>Na TV LG, também dá para instalar no computador com a mesma conta: a TV sincroniza sozinha.</li>
+      </ol>
+    </section>
+
+    <h2>Episódios</h2>
+    <p class="contagem">{{DISPONIVEIS}} de {{TOTAL}} episódios disponíveis</p>
+    <ul class="grade">
+        {{EPISODIOS}}
+    </ul>
+
+    <footer>
+      Versão {{VERSAO}} · Projeto de fã, sem fins lucrativos. Este complemento não hospeda vídeos.
+      Naruto © Masashi Kishimoto / Shueisha · Studio Pierrot. 
+      Imagens: Stremio/Cinemeta.
+    </footer>
   </main>
 </body>
 </html>

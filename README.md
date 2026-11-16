@@ -1,4 +1,6 @@
-<p align="center"><img src="assets/logo.png" alt="Naruto Kai Dublado" width="420"></p>
+<p align="center"><img src="https://images.metahub.space/logo/medium/tt0409591/img" alt="Naruto" width="380"></p>
+
+<h1 align="center">Naruto Kai Dublado</h1>
 
 <p align="center">
   <a href="https://github.com/eipastel/naruto-kai-dub/actions/workflows/publicar.yml"><img src="https://github.com/eipastel/naruto-kai-dub/actions/workflows/publicar.yml/badge.svg" alt="Validar e publicar"></a>
@@ -7,91 +9,86 @@
   <img src="https://img.shields.io/badge/licen%C3%A7a-MIT-blue" alt="MIT">
 </p>
 
-# Naruto Kai Dublado
-
-Complemento (addon) para o **Stremio** com o **Naruto Kai** — a história de Naruto sem fillers e sem enrolação — usando a **dublagem brasileira**. Funciona no computador, no celular e nas **Smart TVs LG** (webOS).
+Complemento (addon) do **Stremio** com o **Naruto clássico dublado em português**, no estilo **Kai**: só a história do mangá, sem fillers, aberturas, encerramentos, prévias e recapitulações. Cada episódio original vira um episódio enxuto de ~19 minutos. Funciona no computador, no celular e nas **Smart TVs LG**.
 
 O projeto tem duas partes:
 
-1. **O complemento Stremio**: arquivos JSON estáticos publicados no GitHub Pages. Para mudar títulos, sinopses ou links, basta editar os dados e fazer `git push`; o Stremio passa a mostrar a novidade **sem reinstalar**.
-2. **As ferramentas de dublagem** (Python + FFmpeg): encontram os cortes do Naruto Kai, descobrem de qual episódio original veio cada trecho e montam automaticamente a faixa dublada em PT-BR, com espaço para ajustes manuais.
+1. **Complemento Stremio**: arquivos JSON estáticos no GitHub Pages. Títulos, sinopses e links mudam com um `git push`, **sem reinstalar** o complemento.
+2. **Ferramentas Python + FFmpeg**: encontram sozinhas a abertura, o encerramento, a prévia e a recapitulação de cada episódio (comparando os episódios entre si), cortam e geram MP4 prontos para a TV. Tudo pode ser ajustado à mão.
 
-> **Aviso legal.** Este repositório **não contém nem distribui vídeos ou áudios**. As ferramentas trabalham só com arquivos locais que você já possui, e o complemento só aponta para fontes que você mesmo configurar. Naruto pertence a Masashi Kishimoto, Shueisha, Studio Pierrot e licenciadores.
+> **Aviso legal.** Este repositório **não contém nem distribui vídeos ou áudios**. As ferramentas trabalham com arquivos locais do usuário e o complemento aponta só para fontes que ele mesmo configurar. Naruto © Masashi Kishimoto / Shueisha · Studio Pierrot.
 
 ## Instalação no Stremio
-
-Endereço do complemento:
 
 ```text
 https://eipastel.github.io/naruto-kai-dub/manifest.json
 ```
 
-- **Computador/celular:** abra <https://eipastel.github.io/naruto-kai-dub/> e clique em **Instalar no Stremio**, ou cole o endereço acima na busca de complementos.
-- **TV LG:** no Stremio da TV, vá em *Complementos*, cole o endereço na busca e confirme. Outra opção: instale no computador com a mesma conta, que a TV sincroniza sozinha.
+- **Computador/celular:** abra <https://eipastel.github.io/naruto-kai-dub/> e clique em **Instalar no Stremio**.
+- **TV LG:** no Stremio da TV, vá em *Complementos*, cole o endereço na busca e instale. Ou instale no computador com a mesma conta: a TV sincroniza.
 
-## Episódios
+Os vídeos tocam a partir do computador onde os MP4 foram gerados (`python -m ferramentas servir`), na mesma rede de casa.
 
-| Episódio | Título | Capítulos | Situação |
-|---|---|---|---|
-| T1E01 | Naruto Uzumaki! | 1–7 | Estrutura pronta; aguardando mapa e fonte de vídeo |
+## O que entra
 
-A situação de cada episódio vive em [`dados/episodios/`](dados/episodios/).
+| Arco | Episódios originais |
+|---|---|
+| Prólogo | 1–5 |
+| País das Ondas | 6–19 |
+| Exame Chunin | 20–67 (sem o 26, recapitulação) |
+| Destruição de Konoha | 68–80 |
+| Busca por Tsunade | 81–100 (sem o 97, filler) |
+| Resgate do Sasuke | 107–135 |
+
+Ficam de fora os fillers 97, 101–106 e 136–220. São **127 episódios**. A situação de cada um está em [`dados/episodios/`](dados/episodios/).
 
 ## Requisitos
 
-- [Node.js](https://nodejs.org/) 20 ou mais novo (gera e valida o complemento)
-- [Python](https://www.python.org/) 3.10 ou mais novo + `pip install -r requirements.txt`
-- [FFmpeg](https://ffmpeg.org/) 6 ou mais novo no `PATH` (`ffmpeg` e `ffprobe`)
+- [Node.js](https://nodejs.org/) 20+ (gera e valida o complemento)
+- [Python](https://www.python.org/) 3.10+ e `pip install -r requirements.txt`
+- [FFmpeg](https://ffmpeg.org/) 6+ no `PATH`. Placa NVIDIA acelera a montagem (NVENC); sem ela, use `"codificador": "libx264"`.
 
 ## Uso rápido
 
 ```bash
-# 1. Configure os caminhos dos seus arquivos locais
-cp config.exemplo.json config.local.json   # depois edite os caminhos
-
-# 2. Mapeie o episódio 1 do Kai nos episódios originais dublados
-python -m ferramentas mapear 1
-
-# 3. Gere o MP4 com a dublagem brasileira
-python -m ferramentas sincronizar 1
-
-# 4. (Opcional) Sirva os MP4 na rede local para a TV
-python -m ferramentas servir
-
-# 5. Valide e gere o complemento
-npm test
-npm run build
+cp config.exemplo.json config.local.json   # aponte a pasta dos episódios dublados
+python -m ferramentas limpar               # detecta o que cortar nos 127 episódios
+python -m ferramentas montar               # gera os MP4 e registra os links
+python -m ferramentas servir               # deixa os vídeos disponíveis para a TV
+npm test && git add dados && git commit -m "Episódios" && git push
 ```
 
-O passo a passo completo, incluindo como ajustar a sincronia à mão e como adicionar novos episódios, está em [docs/FLUXO_DE_TRABALHO.md](docs/FLUXO_DE_TRABALHO.md).
+Passo a passo completo e ajustes manuais: [docs/FLUXO_DE_TRABALHO.md](docs/FLUXO_DE_TRABALHO.md).
 
 ## Estrutura
 
 ```text
 naruto-kai-dub/
 ├── dados/
-│   ├── serie.json              # nome, descrição e gêneros da série
-│   └── episodios/s01e001.json  # um arquivo por episódio: metadados, mapa e links
-├── ferramentas/                # Python + FFmpeg: cortes, mapeamento, sincronia, servidor
-├── scripts/
-│   ├── build.mjs               # valida os dados e gera o complemento em dist/
-│   └── servir-addon.mjs        # testa o complemento localmente no Stremio
+│   ├── serie.json              # nome, descrição, arte e arcos
+│   ├── textos.json             # títulos e sinopses do catálogo (sem spoiler)
+│   ├── classico.json           # referência: dados da Wikipédia e miniaturas dos 220 episódios
+│   └── episodios/s01eNNN.json  # um por episódio: o que é cortado e o link do vídeo
+├── ferramentas/                # Python + FFmpeg: limpeza, montagem, servidor (e modo Kai)
+├── scripts/                    # geração do complemento, teste local, importação de metadados
 ├── site/index.html             # página de instalação
-├── assets/                     # pôster, fundo e logo (arte original do projeto)
-├── tests/                      # testes de ponta a ponta com mídia sintética
+├── tests/                      # testes com mídia sintética
 ├── docs/                       # arquitetura e fluxo de trabalho
 └── .github/workflows/          # validação, testes e publicação automáticos
 ```
 
 ## Documentação
 
-- [Fluxo de trabalho](docs/FLUXO_DE_TRABALHO.md): do arquivo local ao episódio no Stremio.
-- [Arquitetura](docs/ARQUITETURA.md): como o complemento e as ferramentas funcionam por dentro.
+- [Fluxo de trabalho](docs/FLUXO_DE_TRABALHO.md)
+- [Arquitetura](docs/ARQUITETURA.md)
 
 ## Créditos
 
-A ideia de um complemento estático hospedado no GitHub veio do projeto [Naruto Kai Stremio Addon](https://github.com/cybr23/Naruto-Kai-Stremio-Addon), de cybr23. Aquele repositório não declara licença, então **nenhum código ou imagem dele foi copiado**: este é um projeto independente, escrito do zero.
+- Ideia de complemento estático no GitHub: [Naruto Kai Stremio Addon](https://github.com/cybr23/Naruto-Kai-Stremio-Addon), de cybr23. Aquele repositório não tem licença, então nenhum código ou imagem dele foi copiado.
+- Títulos e sinopses do catálogo: próprios, curtos e sem spoiler (`dados/textos.json`). A sinopse de cada episódio é um "Antes:" que resume o episódio anterior.
+- Referência de conteúdo: [Wikipédia em português](https://pt.wikipedia.org/wiki/Lista_de_epis%C3%B3dios_de_Naruto), licença [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/deed.pt-br); `dados/classico.json` guarda esse material e segue essa licença.
+- Pôster, fundo, logo e miniaturas: servidos pelo próprio Stremio (Cinemeta/metahub), não armazenados aqui.
 
 ## Licença
 
-Código e arte original sob a [licença MIT](LICENSE).
+Código sob a [licença MIT](LICENSE).

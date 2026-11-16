@@ -1,0 +1,29 @@
+{
+  "temporada": 1,
+  "episodio": 9,
+  "original": 9,
+  "titulo": "O olho que copia",
+  "sinopse": "Antes: Naruto e Sasuke se uniram num plano para libertar Kakashi.",
+  "adicionado_em": "2026-11-16",
+  "miniatura": "https://episodes.metahub.space/tt0409591/1/9/w780.jpg",
+  "duracao_original": 1417.17,
+  "revisado": false,
+  "removidos": [
+    {
+      "inicio": 0.0,
+      "fim": 95.0,
+      "motivo": "abertura"
+    },
+    {
+      "inicio": 1300.25,
+      "fim": 1417.0,
+      "motivo": "encerramento e prévia"
+    }
+  ],
+  "streams": [
+    {
+      "url": "http://192.168.1.12:8642/Naruto%20Kai%20Dublado%20-%20E009.mp4",
+      "title": "E009 — Kakashi: O Guerreiro Sharingan\n🇧🇷 Dublado · rede de casa"
+    }
+  ]
+}

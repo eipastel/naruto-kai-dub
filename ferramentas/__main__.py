@@ -1,6 +1,11 @@
 """Linha de comando: python -m ferramentas <comando> ...
 
-Comandos:
+Comandos (modo clássico: gera o "Kai" a partir do Naruto clássico dublado):
+  limpar [episódios]      detecta abertura, encerramento, prévia e recapitulação
+  montar [episódios]      gera os MP4 sem esses trechos e registra os links
+  Episódios: "1-135", "5", "1,2,10-20". Sem argumento = todos os canônicos.
+
+Comandos (modo Kai: usa um arquivo do Naruto Kai como molde):
   novo <episodio>         cria dados/episodios/s01eNNN.json a partir do modelo
   cortes <episodio>       lista os cortes de cena detectados no episódio Kai
   mapear <episodio>       mapeia o Kai nos episódios originais e grava o mapa no JSON
@@ -11,9 +16,13 @@ Comandos:
 import argparse
 import json
 import sys
+from datetime import date
 from pathlib import Path
 
-from . import mapeamento, midia, sincronia
+import subprocess
+from urllib.parse import quote
+
+from . import limpeza, mapeamento, midia, sincronia
 
 RAIZ = Path(__file__).resolve().parent.parent
 EPISODIOS = RAIZ / "dados" / "episodios"
@@ -117,6 +126,88 @@ def cmd_sincronizar(args):
     print(f"\nPronto: {saida}")
 
 
+def faixa(texto, permitidos):
+    """'1-5,8' -> [1, 2, 3, 4, 5, 8], só com os episódios permitidos."""
+    if not texto:
+        return sorted(permitidos)
+    numeros = set()
+    for parte in texto.split(","):
+        ini, _, fim = parte.partition("-")
+        numeros.update(range(int(ini), int(fim or ini) + 1))
+    return sorted(numeros & set(permitidos))
+
+
+def classico():
+    cfg = carregar_config()
+    info = cfg.get("classico") or sys.exit("Configure 'classico' (pasta e arquivo) no config.local.json")
+    meta = json.loads((RAIZ / "dados" / "classico.json").read_text(encoding="utf-8"))["episodios"]
+    arquivo = lambda n: Path(info["pasta"]) / info["arquivo"].format(n=n)  # noqa: E731
+    canonicos = [int(n) for n, e in meta.items() if not e["filler"]]
+    textos = json.loads((RAIZ / "dados" / "textos.json").read_text(encoding="utf-8"))["episodios"]
+    for n, t in textos.items():  # títulos e sinopses próprios, sem spoiler
+        meta[n] = {**meta[n], **t}
+    return cfg, meta, arquivo, canonicos
+
+
+def cmd_limpar(args):
+    cfg, meta, arquivo, canonicos = classico()
+    cache = Path(cfg.get("pasta_saida", RAIZ / "saida")) / ".impressoes"
+    impressao = lambda n: limpeza.impressoes(arquivo(n), cache) if arquivo(n).exists() else None  # noqa: E731
+    for n in faixa(args.episodios, canonicos):
+        if not arquivo(n).exists():
+            print(f"E{n:03d}: arquivo não encontrado, pulando")
+            continue
+        destino = EPISODIOS / f"{chave(n)}.json"
+        dados = json.loads(destino.read_text(encoding="utf-8")) if destino.exists() else {}
+        if dados.get("revisado") and not args.forcar:
+            print(f"E{n:03d}: revisado à mão, mantido (use --forcar para refazer)")
+            continue
+        vizinhos = [m for m in (n - 5, n - 3, n - 2, n + 2, n + 3, n + 5) if m >= 1 and arquivo(m).exists()]
+        removidos = limpeza.detectar(impressao(n), [impressao(m) for m in vizinhos],
+                                     [m < n for m in vizinhos], impressao(n - 1) if n > 1 else None)
+        duracao = midia.sondar(arquivo(n))["duracao"]
+        dados = {
+            "temporada": 1, "episodio": n, "original": n,
+            "titulo": meta[str(n)]["titulo"], "sinopse": meta[str(n)]["sinopse"],
+            "adicionado_em": dados.get("adicionado_em") or date.today().isoformat(),
+            "miniatura": meta[str(n)]["miniatura"],
+            "duracao_original": round(duracao, 2),
+            "revisado": False,
+            "removidos": removidos,
+            "streams": dados.get("streams", []),
+        }
+        gravar(destino, dados)
+        fica = sum(b - a for a, b in limpeza.manter(removidos, duracao))
+        print(f"E{n:03d}: {fica / 60:4.1f} de {duracao / 60:4.1f} min | "
+              + ", ".join(f"{r['motivo']} {r['inicio']:.0f}-{r['fim']:.0f}s" for r in removidos))
+
+
+def cmd_montar(args):
+    cfg, meta, arquivo, canonicos = classico()
+    pasta = Path(cfg.get("pasta_saida", RAIZ / "saida"))
+    pasta.mkdir(parents=True, exist_ok=True)
+    for n in faixa(args.episodios, canonicos):
+        destino = EPISODIOS / f"{chave(n)}.json"
+        if not destino.exists():
+            print(f"E{n:03d}: rode 'limpar' antes")
+            continue
+        dados = json.loads(destino.read_text(encoding="utf-8"))
+        nome = f"Naruto Kai Dublado - E{n:03d}.mp4"
+        saida = pasta / nome
+        if saida.exists() and not args.forcar:
+            print(f"E{n:03d}: já existe, pulando")
+        else:
+            print(f"E{n:03d}: montando {nome} ...")
+            temporario = saida.with_name(saida.stem + ".parcial.mp4")
+            subprocess.run(limpeza.comando_montagem(arquivo(n), dados["removidos"], temporario,
+                                                    cfg.get("codificador", "h264_nvenc"),
+                                                    f"Naruto Kai Dublado E{n:03d} - {dados['titulo']}"), check=True)
+            temporario.replace(saida)
+        if cfg.get("url_streams"):
+            dados["streams"] = [{"url": f"{cfg['url_streams'].rstrip('/')}/{quote(nome)}"}]
+            gravar(destino, dados)
+
+
 def cmd_servir(args):
     from .servidor import servir
     cfg = carregar_config()
@@ -126,6 +217,16 @@ def cmd_servir(args):
 def main(argv=None):
     p = argparse.ArgumentParser(prog="python -m ferramentas", description="Ferramentas do Naruto Kai Dublado")
     sub = p.add_subparsers(dest="comando", required=True)
+
+    s = sub.add_parser("limpar", help="detecta abertura, encerramento, prévia e recapitulação")
+    s.add_argument("episodios", nargs="?", help='ex.: "1-135" (padrão: todos os canônicos)')
+    s.add_argument("--forcar", action="store_true", help="refaz também os episódios revisados à mão")
+    s.set_defaults(func=cmd_limpar)
+
+    s = sub.add_parser("montar", help="gera os MP4 limpos e registra os links")
+    s.add_argument("episodios", nargs="?", help='ex.: "1-135" (padrão: todos os canônicos)')
+    s.add_argument("--forcar", action="store_true", help="refaz MP4 que já existem")
+    s.set_defaults(func=cmd_montar)
 
     s = sub.add_parser("novo", help="cria o JSON de um novo episódio")
     s.add_argument("episodio", type=int)

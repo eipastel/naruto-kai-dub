@@ -1,0 +1,24 @@
+{
+  "temporada": 1,
+  "episodio": 113,
+  "original": 113,
+  "titulo": "Choji",
+  "sinopse": "Antes: o time ficou preso numa cúpula de terra que suga chakra.",
+  "adicionado_em": "2026-11-16",
+  "miniatura": "https://episodes.metahub.space/tt0409591/3/30/w780.jpg",
+  "duracao_original": 1414.42,
+  "revisado": false,
+  "removidos": [
+    {
+      "inicio": 0.0,
+      "fim": 115.0,
+      "motivo": "abertura + recapitulação"
+    },
+    {
+      "inicio": 1283.0,
+      "fim": 1414.25,
+      "motivo": "encerramento e prévia"
+    }
+  ],
+  "streams": []
+}

@@ -1,0 +1,29 @@
+{
+  "temporada": 1,
+  "episodio": 5,
+  "original": 5,
+  "titulo": "Hora do almoço",
+  "sinopse": "Antes: Kakashi desafiou o Time 7 a tirar dois guizos dele.",
+  "adicionado_em": "2026-11-16",
+  "miniatura": "https://episodes.metahub.space/tt0409591/1/5/w780.jpg",
+  "duracao_original": 1417.16,
+  "revisado": false,
+  "removidos": [
+    {
+      "inicio": 0.0,
+      "fim": 152.5,
+      "motivo": "abertura + recapitulação"
+    },
+    {
+      "inicio": 1294.25,
+      "fim": 1416.75,
+      "motivo": "encerramento e prévia"
+    }
+  ],
+  "streams": [
+    {
+      "url": "http://192.168.1.12:8642/Naruto%20Kai%20Dublado%20-%20E005.mp4",
+      "title": "E005 — Você Falhou! A Decisão Final de Kakashi\n🇧🇷 Dublado · rede de casa"
+    }
+  ]
+}

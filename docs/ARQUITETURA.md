@@ -49,13 +49,28 @@ O Stremio aceita complementos que são só arquivos JSON em endereços fixos. N�
 
 | Módulo | Papel |
 |---|---|
+| `ferramentas/limpeza.py` | Modo clássico: detecta abertura, encerramento, prévia e recapitulação e monta o MP4 enxuto. |
 | `ferramentas/midia.py` | Chama `ffprobe`/`ffmpeg`: duração, cortes de cena, miniaturas dos quadros, trechos de áudio. |
 | `ferramentas/mapeamento.py` | Encontra a origem de cada trecho do Kai e refina pelo áudio. |
 | `ferramentas/sincronia.py` | Valida o mapa e monta o comando FFmpeg que costura a dublagem. |
 | `ferramentas/servidor.py` | Servidor HTTP com `Range` para a rede local. |
-| `ferramentas/__main__.py` | Linha de comando (`novo`, `cortes`, `mapear`, `sincronizar`, `servir`). |
+| `ferramentas/__main__.py` | Linha de comando (`limpar`, `montar`, `servir`; modo Kai: `novo`, `cortes`, `mapear`, `sincronizar`). |
 
-### Mapeamento
+### Limpeza (modo clássico)
+
+Cada episódio é comparado, quadro a quadro, com episódios próximos usando as mesmas impressões digitais do mapeamento (4 quadros por segundo, guardadas em cache):
+
+1. **Abertura:** trechos repetidos nos primeiros 4 minutos, unidos quando separados por até 30 s (os créditos mudam e quebram a comparação).
+2. **Encerramento:** o primeiro trecho dos últimos 4 minutos que se repete em 2+ vizinhos naquele ponto exato e aparece na maioria deles (ou em todos de um mesmo lado, quando a música do encerramento acabou de mudar). Cenas da história que reaparecem em recapitulações de episódios seguintes não passam nesse filtro. Dali até o fim sai tudo, inclusive a prévia.
+3. **Recapitulação:** logo após a abertura, trechos de 3 s+ que repetem o episódio anterior.
+
+A montagem corta com `trim`/`atrim` + `concat` numa única passada, com 20 ms de fade no áudio das emendas, e codifica com NVENC (ou libx264).
+
+### Arte e metadados
+
+Pôster, fundo, logo e miniaturas vêm do serviço de imagens do próprio Stremio (metahub), os mesmos que o app mostra para Naruto; nada é guardado no repositório. Títulos e sinopses em PT-BR vêm da Wikipédia (CC BY-SA 4.0) via `scripts/importar_metadados.py`.
+
+### Mapeamento (modo Kai)
 
 1. **Cortes:** filtro `scene` do FFmpeg no Kai. Cada intervalo entre cortes é um plano.
 2. **Impressão digital:** cada quadro (5 por segundo) vira uma miniatura 32×18 em cinza, normalizada (média 0, desvio 1). Isso ignora diferenças de brilho, resolução e compressão.
@@ -63,7 +78,7 @@ O Stremio aceita complementos que são só arquivos JSON em endereços fixos. N�
 4. **União:** planos seguidos que continuam no mesmo ponto do original viram um só segmento.
 5. **Refino pelo áudio:** correlação cruzada (FFT) entre o áudio do Kai e o dublado, numa janela de ±0,5 s. Música e efeitos são os mesmos nas duas versões, então o pico mostra o encaixe exato. Se o pico for fraco, mantém-se o encaixe por vídeo.
 
-### Sincronia
+### Sincronia (modo Kai)
 
 Cada segmento vira uma entrada `-ss início -t duração -i arquivo` do FFmpeg, cortada com precisão de amostra. As partes são padronizadas (48 kHz, estéreo), ganham 10 ms de fade nas emendas para evitar estalos, e são unidas com `concat`. O filtro vai para um arquivo temporário, porque episódios longos estourariam o limite da linha de comando do Windows.
 
@@ -75,6 +90,7 @@ O workflow `.github/workflows/publicar.yml` roda em todo push e pull request: va
 
 ## Como escalar
 
-- **Novo episódio:** `python -m ferramentas novo N` + preencher + mapear + sincronizar. Nenhum código muda.
+- **Novo episódio clássico:** `limpar N` + `montar N` + `git push`. Nenhum código muda.
+- **Shippuden:** mesma limpeza; basta outra pasta/padrão de arquivo e uma nova temporada.
 - **Nova temporada (extras, filmes):** criar `s02e001.json` e incluir a temporada em `dados/serie.json`.
 - **Mais de uma fonte por episódio:** adicionar mais itens em `streams` (ex.: 720p e 1080p).

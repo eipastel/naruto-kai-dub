@@ -1,0 +1,29 @@
+{
+  "temporada": 1,
+  "episodio": 14,
+  "original": 14,
+  "titulo": "Chegada barulhenta",
+  "sinopse": "Antes: Sasuke ficou preso nos espelhos de gelo de um ninja misterioso.",
+  "adicionado_em": "2026-11-16",
+  "miniatura": "https://episodes.metahub.space/tt0409591/1/14/w780.jpg",
+  "duracao_original": 1432.93,
+  "revisado": false,
+  "removidos": [
+    {
+      "inicio": 0.0,
+      "fim": 95.0,
+      "motivo": "abertura"
+    },
+    {
+      "inicio": 1295.0,
+      "fim": 1433.0,
+      "motivo": "encerramento e prévia"
+    }
+  ],
+  "streams": [
+    {
+      "url": "http://192.168.1.12:8642/Naruto%20Kai%20Dublado%20-%20E014.mp4",
+      "title": "E014 — O Ninja Número Um, Hiperativo e Cabeça Oca Entra na Briga!\n🇧🇷 Dublado · rede de casa"
+    }
+  ]
+}

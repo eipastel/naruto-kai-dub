@@ -1,0 +1,29 @@
+{
+  "temporada": 1,
+  "episodio": 16,
+  "original": 16,
+  "titulo": "Fúria",
+  "sinopse": "Antes: Sasuke começou a enxergar os movimentos do inimigo, mas a situação ficou crítica.",
+  "adicionado_em": "2026-11-16",
+  "miniatura": "https://episodes.metahub.space/tt0409591/1/16/w780.jpg",
+  "duracao_original": 1430.44,
+  "revisado": false,
+  "removidos": [
+    {
+      "inicio": 0.0,
+      "fim": 95.0,
+      "motivo": "abertura"
+    },
+    {
+      "inicio": 1297.25,
+      "fim": 1430.25,
+      "motivo": "encerramento e prévia"
+    }
+  ],
+  "streams": [
+    {
+      "url": "http://192.168.1.12:8642/Naruto%20Kai%20Dublado%20-%20E016.mp4",
+      "title": "E016 — O Selo Rompido\n🇧🇷 Dublado · rede de casa"
+    }
+  ]
+}

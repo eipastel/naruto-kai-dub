@@ -1,0 +1,24 @@
+{
+  "temporada": 1,
+  "episodio": 95,
+  "original": 95,
+  "titulo": "Aposta de vida",
+  "sinopse": "Antes: Naruto acertou Kabuto com o Rasengan, mas ficou gravemente ferido.",
+  "adicionado_em": "2026-11-16",
+  "miniatura": "https://episodes.metahub.space/tt0409591/3/12/w780.jpg",
+  "duracao_original": 1419.62,
+  "revisado": false,
+  "removidos": [
+    {
+      "inicio": 7.0,
+      "fim": 167.25,
+      "motivo": "abertura + recapitulação"
+    },
+    {
+      "inicio": 1278.75,
+      "fim": 1419.25,
+      "motivo": "encerramento e prévia"
+    }
+  ],
+  "streams": []
+}

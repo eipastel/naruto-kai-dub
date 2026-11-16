@@ -1,0 +1,29 @@
+{
+  "temporada": 1,
+  "episodio": 3,
+  "original": 3,
+  "titulo": "Rivais de sala",
+  "sinopse": "Antes: Naruto ganhou um aprendiz meio atrapalhado, o Konohamaru.",
+  "adicionado_em": "2026-11-16",
+  "miniatura": "https://episodes.metahub.space/tt0409591/1/3/w780.jpg",
+  "duracao_original": 1420.5,
+  "revisado": false,
+  "removidos": [
+    {
+      "inicio": 0.0,
+      "fim": 95.0,
+      "motivo": "abertura"
+    },
+    {
+      "inicio": 1303.75,
+      "fim": 1420.25,
+      "motivo": "encerramento e prévia"
+    }
+  ],
+  "streams": [
+    {
+      "url": "http://192.168.1.12:8642/Naruto%20Kai%20Dublado%20-%20E003.mp4",
+      "title": "E003 — Sasuke e Sakura: Amigos ou Inimigos?\n🇧🇷 Dublado · rede de casa"
+    }
+  ]
+}

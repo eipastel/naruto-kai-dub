@@ -1,0 +1,24 @@
+{
+  "temporada": 1,
+  "episodio": 53,
+  "original": 53,
+  "titulo": "O sábio pervertido",
+  "sinopse": "Antes: Ebisu começou a ensinar Naruto a andar sobre a água.",
+  "adicionado_em": "2026-11-16",
+  "miniatura": "https://episodes.metahub.space/tt0409591/2/18/w780.jpg",
+  "duracao_original": 1419.67,
+  "revisado": false,
+  "removidos": [
+    {
+      "inicio": 7.0,
+      "fim": 101.0,
+      "motivo": "abertura"
+    },
+    {
+      "inicio": 1277.75,
+      "fim": 1419.75,
+      "motivo": "encerramento e prévia"
+    }
+  ],
+  "streams": []
+}

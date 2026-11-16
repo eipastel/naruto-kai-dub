@@ -1,0 +1,29 @@
+{
+  "temporada": 1,
+  "episodio": 7,
+  "original": 7,
+  "titulo": "Neblina no caminho",
+  "sinopse": "Antes: o Time 7 saiu da vila para escoltar um construtor de pontes.",
+  "adicionado_em": "2026-11-16",
+  "miniatura": "https://episodes.metahub.space/tt0409591/1/7/w780.jpg",
+  "duracao_original": 1417.86,
+  "revisado": false,
+  "removidos": [
+    {
+      "inicio": 0.0,
+      "fim": 95.0,
+      "motivo": "abertura"
+    },
+    {
+      "inicio": 1294.5,
+      "fim": 1417.5,
+      "motivo": "encerramento e prévia"
+    }
+  ],
+  "streams": [
+    {
+      "url": "http://192.168.1.12:8642/Naruto%20Kai%20Dublado%20-%20E007.mp4",
+      "title": "E007 — O Assassino da Névoa!\n🇧🇷 Dublado · rede de casa"
+    }
+  ]
+}

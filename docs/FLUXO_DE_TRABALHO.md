@@ -1,25 +1,97 @@
 # Fluxo de trabalho
 
-Como levar um episódio do Naruto Kai do seu arquivo local até o Stremio com a dublagem brasileira.
+Há dois modos. O **modo clássico** é o principal: gera o "Kai" a partir dos episódios do Naruto clássico dublado. O **modo Kai** usa um arquivo do Naruto Kai como molde e encaixa a dublagem nele (veja o apêndice).
 
-## 1. Preparar o ambiente (uma vez)
+## 1. Preparar (uma vez)
 
 ```bash
 pip install -r requirements.txt
 cp config.exemplo.json config.local.json
 ```
 
-Edite `config.local.json` (ele fica só na sua máquina, nunca vai para o GitHub):
+No `config.local.json` (fica só na sua máquina):
 
 | Campo | O que é |
 |---|---|
-| `kai` | Caminho de cada episódio do Naruto Kai, pela chave `s01e001`, `s01e002`… |
-| `originais_dublados` | Caminho de cada episódio **original** do Naruto com áudio PT-BR, pelo número do episódio. |
-| `pasta_saida` | Onde os MP4 finais serão gravados. |
-| `filtro_kai` / `filtro_original` | Filtro FFmpeg opcional aplicado antes da comparação (veja “Imagens diferentes” abaixo). |
-| `ajuste_origem_ms` | Atraso fixo, em milissegundos, para um episódio original inteiro. Ex.: `{"3": -120}`. |
+| `classico.pasta` | Pasta com os episódios dublados do clássico. |
+| `classico.arquivo` | Nome dos arquivos, com `{n:03d}` no lugar do número. Ex.: `Naruto Dublado Episodio {n:03d} HD MQ.mp4`. |
+| `pasta_saida` | Onde ficam os MP4 prontos (e o cache da análise, em `.impressoes`). |
+| `codificador` | `h264_nvenc` (placa NVIDIA, ~1 min por episódio) ou `libx264` (processador, mais lento). |
+| `url_streams` | Endereço do servidor da sua casa, ex.: `http://192.168.1.12:8642`. Use o IP que `python -m ferramentas servir` mostrar. |
 
-## 2. Criar o episódio
+## 2. Detectar o que cortar
+
+```bash
+python -m ferramentas limpar          # todos os 127 episódios canônicos
+python -m ferramentas limpar 20-30    # só alguns
+```
+
+Para cada episódio é criado `dados/episodios/s01eNNN.json` com título, sinopse, miniatura e a lista `removidos`:
+
+```json
+"removidos": [
+  { "inicio": 0.0,     "fim": 152.5,  "motivo": "abertura + recapitulação" },
+  { "inicio": 1294.25, "fim": 1416.75, "motivo": "encerramento e prévia" }
+]
+```
+
+Como a detecção funciona:
+
+- **Abertura:** o que se repete no começo dos episódios próximos (2, 3 e 5 antes e depois).
+- **Encerramento e prévia:** o primeiro trecho do fim que se repete na maioria dos vizinhos; dali até o final sai tudo.
+- **Recapitulação:** logo depois da abertura, o que repete cenas do episódio anterior.
+- Flashbacks no meio do episódio são mantidos.
+
+A primeira rodada lê todos os vídeos (~12 s por episódio); as seguintes usam o cache.
+
+## 3. Revisar (opcional)
+
+Edite `inicio`/`fim` em `removidos` se algum corte ficou adiantado ou atrasado, ou apague um item para manter o trecho. Marque `"revisado": true` para o `limpar` não sobrescrever seu ajuste.
+
+## 4. Montar os vídeos
+
+```bash
+python -m ferramentas montar          # todos
+python -m ferramentas montar 5        # só um
+python -m ferramentas montar 5 --forcar   # refaz depois de um ajuste
+```
+
+Gera `Naruto Kai Dublado - E005.mp4` na `pasta_saida` (H.264 8 bits + AAC, `faststart`, ideal para TV LG) e registra o link em `streams`.
+
+## 5. Assistir na TV
+
+```bash
+python -m ferramentas servir
+```
+
+Deixe rodando no computador enquanto assiste. O servidor aceita avançar/voltar. Dica: reserve o IP do computador no roteador para o endereço não mudar.
+
+## 6. Publicar
+
+```bash
+npm test
+git add dados && git commit -m "Episódios" && git push
+```
+
+O GitHub Actions valida e publica; o Stremio mostra as mudanças sem reinstalar. Para testar antes: `npm run local` e instale `http://127.0.0.1:7000/manifest.json` no Stremio do computador.
+
+## Títulos e sinopses
+
+O catálogo usa `dados/textos.json`: título próprio, curto e sem spoiler, e uma sinopse que começa com "Antes:" e resume o episódio **anterior** do catálogo (pulando fillers). Para mudar um texto, edite esse arquivo e faça `git push`.
+
+`dados/classico.json` (referência da Wikipédia em português e miniaturas do Stremio) é gerado por:
+
+```bash
+python scripts/importar_metadados.py
+```
+
+---
+
+## Apêndice: modo Kai
+
+Use quando tiver os arquivos do próprio Naruto Kai. No `config.local.json`, preencha `kai` (`{"s01e001": "caminho do Kai 1"}`) e `originais_dublados` (`{"1": "caminho do episódio 1 dublado", ...}`).
+
+### Criar o episódio
 
 O episódio 1 já existe. Para os próximos:
 
@@ -32,7 +104,7 @@ Preencha em `dados/episodios/s01e002.json`:
 - `titulo`, `sinopse`, `capitulos_manga` e `adicionado_em` (`AAAA-MM-DD`);
 - `originais`: os episódios originais onde o mapeamento deve procurar. Pode colocar alguns a mais por segurança; só deixa a análise um pouco mais lenta.
 
-## 3. Identificar os cortes (opcional)
+### Identificar os cortes (opcional)
 
 ```bash
 python -m ferramentas cortes 1
@@ -40,7 +112,7 @@ python -m ferramentas cortes 1
 
 Lista os instantes em que o FFmpeg detecta troca de cena. O `mapear` já faz isso sozinho; este comando serve para conferir. Use `--limiar 0.25` para achar mais cortes ou `--limiar 0.5` para menos.
 
-## 4. Mapear o Kai nos episódios originais
+### Mapear o Kai nos episódios originais
 
 ```bash
 python -m ferramentas mapear 1
@@ -70,7 +142,7 @@ Trechos que não existem nos originais (vinhetas e cartelas novas do Kai) ficam 
 
 Para refazer um mapa que já existe, use `--forcar` (isso apaga os ajustes manuais).
 
-## 5. Gerar o episódio dublado
+### Gerar o episódio dublado
 
 ```bash
 python -m ferramentas sincronizar 1
@@ -83,7 +155,7 @@ Gera `Naruto Kai Dublado - S01E001.mp4` na `pasta_saida` com:
 - faixa 2: áudio original do Kai (use `--so-dublado` para omitir);
 - `faststart`, para começar a tocar rápido pela rede.
 
-## 6. Ajustes manuais
+### Ajustes manuais
 
 Assista ao MP4. Se uma fala estiver adiantada ou atrasada:
 
@@ -94,7 +166,7 @@ Assista ao MP4. Se uma fala estiver adiantada ou atrasada:
 
 Depois rode `sincronizar` de novo. Ele valida o mapa antes (sem buracos, sem sobreposição, cobrindo o episódio inteiro).
 
-## 7. Disponibilizar o vídeo
+### Disponibilizar o vídeo
 
 O repositório **não hospeda vídeo**. Você escolhe onde o seu MP4 fica:
 
@@ -113,7 +185,7 @@ Formatos aceitos: `url`, `infoHash` (+ `fileIdx`), `ytId` ou `externalUrl` — e
 
 > Lembre: o repositório é público. Só publique links para conteúdo que você tem direito de compartilhar. Links da rede local só funcionam dentro da sua casa.
 
-## 8. Publicar
+### Publicar
 
 ```bash
 npm test          # valida os dados e roda os testes
@@ -124,7 +196,7 @@ O GitHub Actions valida, gera e publica. Em poucos minutos o Stremio mostra a mu
 
 Para testar antes de publicar: `npm run local` e instale `http://127.0.0.1:7000/manifest.json` no Stremio do computador.
 
-## Problemas comuns
+### Problemas comuns
 
 **Imagens diferentes entre Kai e original.** Se o Kai foi feito de outra fonte (ex.: 16:9 recortado a partir do 4:3, ou com bordas pretas), a comparação perde precisão. Iguale as duas imagens com filtros FFmpeg no `config.local.json`, por exemplo:
 

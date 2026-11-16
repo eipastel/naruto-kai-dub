@@ -1,0 +1,29 @@
+{
+  "temporada": 1,
+  "episodio": 4,
+  "original": 4,
+  "titulo": "O professor atrasado",
+  "sinopse": "Antes: os times foram formados, e Naruto caiu com Sasuke e Sakura.",
+  "adicionado_em": "2026-11-16",
+  "miniatura": "https://episodes.metahub.space/tt0409591/1/4/w780.jpg",
+  "duracao_original": 1417.33,
+  "revisado": false,
+  "removidos": [
+    {
+      "inicio": 0.0,
+      "fim": 95.0,
+      "motivo": "abertura"
+    },
+    {
+      "inicio": 1294.75,
+      "fim": 1417.25,
+      "motivo": "encerramento e prévia"
+    }
+  ],
+  "streams": [
+    {
+      "url": "http://192.168.1.12:8642/Naruto%20Kai%20Dublado%20-%20E004.mp4",
+      "title": "E004 — Aprovar ou Reprovar? Um Exercício de Sobrevivência\n🇧🇷 Dublado · rede de casa"
+    }
+  ]
+}

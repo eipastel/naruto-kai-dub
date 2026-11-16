@@ -1,0 +1,29 @@
+{
+  "temporada": 1,
+  "episodio": 17,
+  "original": 17,
+  "titulo": "Um sonho simples",
+  "sinopse": "Antes: Naruto liberou um poder assustador contra Haku.",
+  "adicionado_em": "2026-11-16",
+  "miniatura": "https://episodes.metahub.space/tt0409591/1/17/w780.jpg",
+  "duracao_original": 1435.78,
+  "revisado": false,
+  "removidos": [
+    {
+      "inicio": 0.0,
+      "fim": 161.25,
+      "motivo": "abertura + recapitulação"
+    },
+    {
+      "inicio": 1296.0,
+      "fim": 1435.25,
+      "motivo": "encerramento e prévia"
+    }
+  ],
+  "streams": [
+    {
+      "url": "http://192.168.1.12:8642/Naruto%20Kai%20Dublado%20-%20E017.mp4",
+      "title": "E017 — Passado Branco, Ambição Escondida\n🇧🇷 Dublado · rede de casa"
+    }
+  ]
+}

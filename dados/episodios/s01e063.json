@@ -1,0 +1,24 @@
+{
+  "temporada": 1,
+  "episodio": 63,
+  "original": 63,
+  "titulo": "Esperando Sasuke",
+  "sinopse": "Antes: Naruto venceu Neji e mudou o jeito dele de ver o destino.",
+  "adicionado_em": "2026-11-16",
+  "miniatura": "https://episodes.metahub.space/tt0409591/2/28/w780.jpg",
+  "duracao_original": 1416.05,
+  "revisado": false,
+  "removidos": [
+    {
+      "inicio": 0.0,
+      "fim": 95.0,
+      "motivo": "abertura"
+    },
+    {
+      "inicio": 1284.25,
+      "fim": 1415.75,
+      "motivo": "encerramento e prévia"
+    }
+  ],
+  "streams": []
+}

@@ -10,7 +10,7 @@ import tempfile
 import unittest
 from pathlib import Path
 
-from ferramentas import mapeamento, midia, sincronia
+from ferramentas import limpeza, mapeamento, midia, sincronia
 
 FONTES = {
     "a1": "testsrc2=s=320x240:r=25", "a2": "mandelbrot=s=320x240:r=25",
@@ -89,6 +89,39 @@ class PontaAPonta(unittest.TestCase):
                                  "stream_tags=language", "-of", "csv=p=0", str(saida)],
                                 capture_output=True, text=True).stdout.split()
         self.assertEqual(faixas, ["por", "jpn"])
+
+
+class Limpeza(unittest.TestCase):
+    """Episódios falsos feitos de 'quadros' aleatórios: abertura e encerramento iguais em todos,
+    história diferente em cada um, e o episódio 2 começa recapitulando o fim do episódio 1."""
+
+    def setUp(self):
+        import numpy as np
+        rng = np.random.default_rng(1)
+        quadros = lambda s: rng.standard_normal((int(s * limpeza.FPS), 576)).astype(np.float32)  # noqa: E731
+        abertura, encerramento = quadros(90), quadros(120)
+        self.historias = [quadros(1100) for _ in range(6)]
+        self.eps = [np.concatenate([abertura, h, encerramento]) for h in self.historias]
+        recap = self.historias[0][-60 * limpeza.FPS:]  # último minuto do episódio 1
+        self.eps[1] = np.concatenate([abertura, recap, self.historias[1], encerramento])
+
+    def test_detecta_abertura_recapitulacao_e_encerramento(self):
+        rem = limpeza.detectar(self.eps[1], [self.eps[3], self.eps[4], self.eps[5]], [False] * 3, self.eps[0])
+        self.assertEqual([r["motivo"] for r in rem], ["abertura + recapitulação", "encerramento e prévia"])
+        self.assertAlmostEqual(rem[0]["inicio"], 0, delta=0.5)
+        self.assertAlmostEqual(rem[0]["fim"], 150, delta=0.5)
+        self.assertAlmostEqual(rem[1]["inicio"], 1250, delta=0.5)
+
+    def test_cena_repetida_em_um_so_vizinho_nao_vira_encerramento(self):
+        # o fim da história do episódio 3 reaparece só no episódio 5 (como numa recapitulação)
+        import numpy as np
+        ep5 = np.concatenate([self.historias[2][-100 * limpeza.FPS:], self.eps[4]])
+        rem = limpeza.detectar(self.eps[2], [self.eps[0], self.eps[1], ep5], [True, True, False], self.eps[1])
+        self.assertAlmostEqual(rem[-1]["inicio"], 1190, delta=0.5)
+
+    def test_manter_e_complemento_de_removidos(self):
+        rem = [{"inicio": 0, "fim": 100}, {"inicio": 1200, "fim": 1400}]
+        self.assertEqual(limpeza.manter(rem, 1400), [[100, 1200]])
 
 
 class Unidades(unittest.TestCase):

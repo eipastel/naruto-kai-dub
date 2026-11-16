@@ -1,4 +1,11 @@
 {
+  "classico": {
+    "pasta": "D:/Midia/Naruto Dublado",
+    "arquivo": "Naruto Dublado Episodio {n:03d} HD MQ.mp4"
+  },
+  "pasta_saida": "D:/Midia/Naruto Kai Dublado",
+  "codificador": "h264_nvenc",
+  "url_streams": "http://192.168.0.10:8642",
   "kai": {
     "s01e001": "D:/Midia/Naruto Kai/Naruto Kai 01.mkv"
   },
@@ -10,7 +17,6 @@
     "5": "D:/Midia/Naruto Dublado/Naruto 005.mkv",
     "6": "D:/Midia/Naruto Dublado/Naruto 006.mkv"
   },
-  "pasta_saida": "D:/Midia/Naruto Kai Dublado",
   "filtro_kai": null,
   "filtro_original": null,
   "ajuste_origem_ms": {}

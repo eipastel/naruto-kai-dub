@@ -1,0 +1,28 @@
+{
+  "temporada": 1,
+  "episodio": 40,
+  "original": 40,
+  "titulo": "Visita indesejada",
+  "sinopse": "Antes: Sasuke venceu a primeira luta com um golpe inspirado em Lee.",
+  "adicionado_em": "2026-11-16",
+  "miniatura": "https://episodes.metahub.space/tt0409591/2/5/w780.jpg",
+  "duracao_original": 1425.3,
+  "revisado": false,
+  "removidos": [
+    {
+      "inicio": 0.0,
+      "fim": 151.25,
+      "motivo": "abertura + recapitulação"
+    },
+    {
+      "inicio": 1281.0,
+      "fim": 1425.25,
+      "motivo": "encerramento e prévia"
+    }
+  ],
+  "streams": [
+    {
+      "url": "http://192.168.1.12:8642/Naruto%20Kai%20Dublado%20-%20E040.mp4"
+    }
+  ]
+}

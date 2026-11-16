@@ -1,0 +1,29 @@
+{
+  "temporada": 1,
+  "episodio": 19,
+  "original": 19,
+  "titulo": "O nome da ponte",
+  "sinopse": "Antes: Haku se colocou na frente do golpe de Kakashi para proteger Zabuza.",
+  "adicionado_em": "2026-11-16",
+  "miniatura": "https://episodes.metahub.space/tt0409591/1/19/w780.jpg",
+  "duracao_original": 1436.48,
+  "revisado": false,
+  "removidos": [
+    {
+      "inicio": 0.0,
+      "fim": 95.0,
+      "motivo": "abertura"
+    },
+    {
+      "inicio": 1291.0,
+      "fim": 1435.25,
+      "motivo": "encerramento e prévia"
+    }
+  ],
+  "streams": [
+    {
+      "url": "http://192.168.1.12:8642/Naruto%20Kai%20Dublado%20-%20E019.mp4",
+      "title": "E019 — O Demônio na Neve\n🇧🇷 Dublado · rede de casa"
+    }
+  ]
+}

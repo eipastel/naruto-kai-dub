@@ -1,0 +1,24 @@
+{
+  "temporada": 1,
+  "episodio": 65,
+  "original": 65,
+  "titulo": "A chegada",
+  "sinopse": "Antes: Shikamaru montou um plano brilhante contra Temari, mas desistiu no fim.",
+  "adicionado_em": "2026-11-16",
+  "miniatura": "https://episodes.metahub.space/tt0409591/2/30/w780.jpg",
+  "duracao_original": 1421.34,
+  "revisado": false,
+  "removidos": [
+    {
+      "inicio": 0.0,
+      "fim": 95.0,
+      "motivo": "abertura"
+    },
+    {
+      "inicio": 1280.0,
+      "fim": 1421.25,
+      "motivo": "encerramento e prévia"
+    }
+  ],
+  "streams": []
+}

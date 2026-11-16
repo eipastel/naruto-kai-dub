@@ -1,0 +1,24 @@
+{
+  "temporada": 1,
+  "episodio": 91,
+  "original": 91,
+  "titulo": "Uma aposta",
+  "sinopse": "Antes: Naruto conheceu Tsunade e brigou com ela por desdenhar dos Hokages.",
+  "adicionado_em": "2026-11-16",
+  "miniatura": "https://episodes.metahub.space/tt0409591/3/8/w780.jpg",
+  "duracao_original": 1418.92,
+  "revisado": false,
+  "removidos": [
+    {
+      "inicio": 7.0,
+      "fim": 91.0,
+      "motivo": "abertura + recapitulação"
+    },
+    {
+      "inicio": 1278.0,
+      "fim": 1418.75,
+      "motivo": "encerramento e prévia"
+    }
+  ],
+  "streams": []
+}

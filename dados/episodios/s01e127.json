@@ -1,0 +1,24 @@
+{
+  "temporada": 1,
+  "episodio": 127,
+  "original": 127,
+  "titulo": "Floresta de ossos",
+  "sinopse": "Antes: Gaara enfrentou Kimimaro, um inimigo que não desiste.",
+  "adicionado_em": "2026-11-16",
+  "miniatura": "https://episodes.metahub.space/tt0409591/3/44/w780.jpg",
+  "duracao_original": 1414.47,
+  "revisado": false,
+  "removidos": [
+    {
+      "inicio": 0.0,
+      "fim": 95.0,
+      "motivo": "abertura"
+    },
+    {
+      "inicio": 1278.5,
+      "fim": 1414.25,
+      "motivo": "encerramento e prévia"
+    }
+  ],
+  "streams": []
+}

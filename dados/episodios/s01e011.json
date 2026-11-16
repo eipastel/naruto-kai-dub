@@ -1,0 +1,29 @@
+{
+  "temporada": 1,
+  "episodio": 11,
+  "original": 11,
+  "titulo": "Uma vila sem esperança",
+  "sinopse": "Antes: desconfiado, Kakashi começou a treinar o time para controlar o chakra.",
+  "adicionado_em": "2026-11-16",
+  "miniatura": "https://episodes.metahub.space/tt0409591/1/11/w780.jpg",
+  "duracao_original": 1417.62,
+  "revisado": false,
+  "removidos": [
+    {
+      "inicio": 0.0,
+      "fim": 95.0,
+      "motivo": "abertura"
+    },
+    {
+      "inicio": 1295.0,
+      "fim": 1417.5,
+      "motivo": "encerramento e prévia"
+    }
+  ],
+  "streams": [
+    {
+      "url": "http://192.168.1.12:8642/Naruto%20Kai%20Dublado%20-%20E011.mp4",
+      "title": "E011 — A Terra Onde uma Vez um Herói Viveu\n🇧🇷 Dublado · rede de casa"
+    }
+  ]
+}
