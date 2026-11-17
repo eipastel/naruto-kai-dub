@@ -1,34 +1,45 @@
-<p align="center"><img src="https://images.metahub.space/logo/medium/tt0409591/img" alt="Naruto" width="380"></p>
+<p align="center"><img src="site/arte/poster.jpg" alt="Pastel Provider" width="300"></p>
 
-<h1 align="center">Naruto Kai Dublado</h1>
+<h1 align="center">Pastel Provider</h1>
 
 <p align="center">
-  <a href="https://github.com/eipastel/naruto-kai-dub/actions/workflows/publicar.yml"><img src="https://github.com/eipastel/naruto-kai-dub/actions/workflows/publicar.yml/badge.svg" alt="Validar e publicar"></a>
+  <a href="https://github.com/eipastel/pastel-provider/actions/workflows/publicar.yml"><img src="https://github.com/eipastel/pastel-provider/actions/workflows/publicar.yml/badge.svg" alt="Validar e publicar"></a>
   <img src="https://img.shields.io/badge/Stremio-complemento-7b5bf5" alt="Stremio">
   <img src="https://img.shields.io/badge/idioma-PT--BR-009c3b" alt="PT-BR">
   <img src="https://img.shields.io/badge/licen%C3%A7a-MIT-blue" alt="MIT">
 </p>
 
-Complemento (addon) do **Stremio** com o **Naruto clássico dublado em português**, no estilo **Kai**: só a história do mangá, sem fillers, aberturas, encerramentos, prévias e recapitulações. Cada episódio original vira um episódio enxuto de ~19 minutos. Funciona no computador, no celular e nas **Smart TVs LG**.
+Complemento (addon) do **Stremio** que mostra **um único item na biblioteca**, o *Pastel Provider*, em que **cada temporada é uma obra diferente**:
+
+| Temporada | Conteúdo |
+|---|---|
+| 1 · Naruto Dublado | Naruto clássico dublado, no estilo **Kai**: só a história do mangá, sem fillers, aberturas, encerramentos, prévias e recapitulações. 127 episódios de ~19 min. |
+
+Funciona no computador, no celular e nas **Smart TVs LG**.
 
 O projeto tem duas partes:
 
-1. **Complemento Stremio**: arquivos JSON estáticos no GitHub Pages. Títulos, sinopses e links mudam com um `git push`, **sem reinstalar** o complemento.
+1. **Complemento Stremio**: arquivos JSON estáticos publicados pelo GitHub Actions. Títulos, sinopses e links mudam com um `git push`, **sem reinstalar**.
 2. **Ferramentas Python + FFmpeg**: encontram sozinhas a abertura, o encerramento, a prévia e a recapitulação de cada episódio (comparando os episódios entre si), cortam e geram MP4 prontos para a TV. Tudo pode ser ajustado à mão.
 
-> **Aviso legal.** Este repositório **não contém nem distribui vídeos ou áudios**. As ferramentas trabalham com arquivos locais do usuário e o complemento aponta só para fontes que ele mesmo configurar. Naruto © Masashi Kishimoto / Shueisha · Studio Pierrot.
+> **Aviso legal.** Este repositório **não contém nem distribui vídeos ou áudios**. As ferramentas trabalham com arquivos locais do usuário e o complemento aponta só para fontes que ele mesmo configurar.
 
 ## Instalação no Stremio
 
 ```text
-https://eipastel.github.io/naruto-kai-dub/manifest.json
+https://cdn.jsdelivr.net/gh/eipastel/pastel-provider@addon/manifest.json
 ```
 
-- **Computador/celular:** abra <https://eipastel.github.io/naruto-kai-dub/> e clique em **Instalar no Stremio**.
-- **TV LG:** no Stremio da TV, vá em *Complementos*, cole o endereço na busca e instale. Ou instale no computador com a mesma conta: a TV sincroniza.
-- **TV que mostra "This catalog did not return any content":** use o espelho no jsDelivr, com outro certificado: `https://cdn.jsdelivr.net/gh/eipastel/naruto-kai-dub@addon/manifest.json`.
+- **Computador/celular:** abra <https://eipastel.github.io/pastel-provider/> e clique em **Instalar no Stremio**.
+- **TV LG:** instale no computador com a mesma conta (a TV sincroniza) ou cole o endereço na busca de *Complementos* da TV.
 
-Os vídeos tocam a partir do computador onde os MP4 foram gerados (`python -m ferramentas servir`), na mesma rede de casa.
+O endereço é o espelho no jsDelivr, porque algumas TVs LG não aceitam o certificado do GitHub Pages. Os vídeos tocam a partir do computador onde os MP4 foram gerados (`python -m ferramentas servir`, que liga sozinho com o Windows), na mesma rede de casa.
+
+## Nova temporada
+
+1. Dê um nome a ela em `dados/serie.json`, em `temporadas` (ex.: `"2": { "nome": "Odisseia" }`).
+2. Crie `dados/episodios/s02eNNN.json` para cada episódio (um filme é uma temporada com um episódio).
+3. `npm test` e `git push`.
 
 ## O que entra
 
@@ -64,15 +75,15 @@ Passo a passo completo e ajustes manuais: [docs/FLUXO_DE_TRABALHO.md](docs/FLUXO
 ## Estrutura
 
 ```text
-naruto-kai-dub/
+pastel-provider/
 ├── dados/
-│   ├── serie.json              # nome, descrição, arte e arcos
+│   ├── serie.json              # nome, descrição, arte e temporadas
 │   ├── textos.json             # títulos e sinopses do catálogo (sem spoiler)
 │   ├── classico.json           # referência: dados da Wikipédia e miniaturas dos 220 episódios
 │   └── episodios/s01eNNN.json  # um por episódio: o que é cortado e o link do vídeo
 ├── ferramentas/                # Python + FFmpeg: limpeza, montagem, servidor (e modo Kai)
 ├── scripts/                    # geração do complemento, teste local, importação de metadados
-├── site/index.html             # página de instalação
+├── site/                       # página de instalação e arte (pôster e fundo)
 ├── tests/                      # testes com mídia sintética
 ├── docs/                       # arquitetura e fluxo de trabalho
 └── .github/workflows/          # validação, testes e publicação automáticos

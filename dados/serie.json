@@ -1,20 +1,52 @@
 {
-  "id": "nkdub",
-  "nome": "Naruto Kai Dublado",
-  "descricao": "Naruto clássico dublado em português, no estilo Kai: só a história do mangá, sem fillers, aberturas, encerramentos, prévias e recapitulações.\n\nProjeto de fã, sem fins lucrativos. Este complemento não hospeda vídeos: ele organiza os episódios e aponta para fontes configuradas pelo próprio usuário.",
-  "generos": ["Animação", "Ação", "Aventura"],
-  "ano": "2002–2007",
+  "id": "pastel",
+  "nome": "Pastel Provider",
+  "descricao": "Sua coleção particular, organizada como uma série: cada temporada é uma obra diferente.\n\nTemporada 1 — Naruto Dublado: o Naruto clássico dublado em português, no estilo Kai, só com a história do mangá, sem fillers, aberturas, encerramentos, prévias e recapitulações.\n\nProjeto pessoal, sem fins lucrativos. Este complemento não hospeda vídeos: ele aponta para arquivos servidos pelo próprio usuário.",
+  "generos": [
+    "Animação",
+    "Ação",
+    "Aventura"
+  ],
+  "ano": "2026",
   "arte": {
-    "poster": "https://images.metahub.space/poster/medium/tt0409591/img",
-    "fundo": "https://images.metahub.space/background/medium/tt0409591/img",
-    "logo": "https://images.metahub.space/logo/medium/tt0409591/img"
+    "poster": "arte/poster.jpg",
+    "fundo": "arte/fundo.jpg"
   },
-  "arcos": [
-    { "de": 1, "ate": 5, "nome": "Prólogo" },
-    { "de": 6, "ate": 19, "nome": "País das Ondas" },
-    { "de": 20, "ate": 67, "nome": "Exame Chunin" },
-    { "de": 68, "ate": 80, "nome": "Destruição de Konoha" },
-    { "de": 81, "ate": 100, "nome": "Busca por Tsunade" },
-    { "de": 107, "ate": 135, "nome": "Resgate do Sasuke" }
-  ]
+  "temporadas": {
+    "1": {
+      "nome": "Naruto Dublado",
+      "arcos": [
+        {
+          "de": 1,
+          "ate": 5,
+          "nome": "Prólogo"
+        },
+        {
+          "de": 6,
+          "ate": 19,
+          "nome": "País das Ondas"
+        },
+        {
+          "de": 20,
+          "ate": 67,
+          "nome": "Exame Chunin"
+        },
+        {
+          "de": 68,
+          "ate": 80,
+          "nome": "Destruição de Konoha"
+        },
+        {
+          "de": 81,
+          "ate": 100,
+          "nome": "Busca por Tsunade"
+        },
+        {
+          "de": 107,
+          "ate": 135,
+          "nome": "Resgate do Sasuke"
+        }
+      ]
+    }
+  }
 }

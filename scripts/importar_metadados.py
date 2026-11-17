@@ -18,7 +18,7 @@ FILLERS = {26, 97, *range(101, 107), *range(136, 221)}
 
 
 def baixar_json(url):
-    pedido = urllib.request.Request(url, headers={"User-Agent": "naruto-kai-dub/1.0"})
+    pedido = urllib.request.Request(url, headers={"User-Agent": "pastel-provider/1.0"})
     with urllib.request.urlopen(pedido, timeout=60) as resposta:
         return json.loads(resposta.read().decode("utf-8", errors="replace"))
 

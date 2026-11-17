@@ -1,13 +1,14 @@
 // Gera o complemento Stremio estático em dist/ a partir de dados/.
 // Uso: node scripts/build.mjs            (valida e gera)
 //      node scripts/build.mjs --validar  (só valida)
-import { mkdirSync, readdirSync, readFileSync, rmSync, writeFileSync } from "node:fs";
+import { cpSync, mkdirSync, readdirSync, readFileSync, rmSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
 import { fileURLToPath } from "node:url";
 
 const RAIZ = fileURLToPath(new URL("..", import.meta.url));
 const DIST = join(RAIZ, "dist");
-const URL_BASE = (process.env.NKDUB_URL_BASE || "https://eipastel.github.io/naruto-kai-dub").replace(/\/$/, "");
+// Espelho no jsDelivr (certificado Sectigo): é o endereço que funciona nas TVs LG antigas.
+const URL_ESPELHO = (process.env.URL_ESPELHO || "https://cdn.jsdelivr.net/gh/eipastel/pastel-provider@addon").replace(/\/$/, "");
 const lerJson = (arquivo) => JSON.parse(readFileSync(join(RAIZ, arquivo), "utf8"));
 
 const pacote = lerJson("package.json");
@@ -27,7 +28,8 @@ const texto = (v) => typeof v === "string" && v.trim() !== "";
 
 if (!/^[a-z0-9]+$/.test(serie.id)) erro("serie.json", "id deve ter só letras minúsculas e números");
 if (!texto(serie.nome) || !texto(serie.descricao)) erro("serie.json", "nome e descricao são obrigatórios");
-if (!["poster", "fundo", "logo"].every((k) => /^https:\/\//.test(serie.arte?.[k] ?? ""))) erro("serie.json", "arte.poster, arte.fundo e arte.logo devem ser URLs https");
+for (const k of ["poster", "fundo"]) if (!texto(serie.arte?.[k])) erro("serie.json", `arte.${k} é obrigatório`);
+for (const ep of episodios) if (!texto(serie.temporadas?.[ep.temporada]?.nome)) erro(ep.arquivo, `temporada ${ep.temporada} sem nome em serie.json`);
 
 const vistos = new Set();
 for (const ep of episodios) {
@@ -90,9 +92,15 @@ rmSync(DIST, { recursive: true, force: true });
 mkdirSync(DIST, { recursive: true });
 writeFileSync(join(DIST, ".nojekyll"), "");
 
-// Arte oficial servida pelo próprio Stremio (metahub), a mesma que o app mostra para Naruto.
-const { poster, fundo, logo } = serie.arte;
-const arcoDe = (n) => serie.arcos.find((a) => n >= a.de && n <= a.ate)?.nome;
+// Arte: caminhos relativos vêm de site/ e são servidos pelo espelho; URLs completas passam direto.
+cpSync(join(RAIZ, "site/arte"), join(DIST, "arte"), { recursive: true });
+const arte = (v) => (v && !/^https?:\/\//.test(v) ? `${URL_ESPELHO}/${v}` : v);
+const [poster, fundo, logo] = ["poster", "fundo", "logo"].map((k) => arte(serie.arte[k]));
+const temporada = (ep) => serie.temporadas[ep.temporada];
+const arcoDe = (ep) => {
+  const n = ep.original ?? ep.episodio;
+  return temporada(ep).arcos?.find((a) => n >= a.de && n <= a.ate)?.nome;
+};
 const minutos = (ep) => {
   if (!ep.duracao_original) return null;
   const removido = (ep.removidos ?? []).reduce((t, r) => t + (r.fim - r.inicio), 0);
@@ -133,12 +141,12 @@ escrever(`meta/series/${serie.id}.json`, {
     ...resumo,
     videos: episodios.map((ep) => ({
       id: idVideo(ep),
-      title: `${codigo(ep)} — ${ep.titulo}`,
+      title: `${temporada(ep).nome} · ${codigo(ep)} — ${ep.titulo}`,
       season: ep.temporada,
       episode: ep.episodio,
       released: new Date(`${ep.adicionado_em}T12:00:00Z`).toISOString(),
       overview: [
-        arcoDe(ep.original ?? ep.episodio) && `Arco: ${arcoDe(ep.original ?? ep.episodio)}.`,
+        `Temporada ${ep.temporada}: ${temporada(ep).nome}.${arcoDe(ep) ? ` Arco: ${arcoDe(ep)}.` : ""}`,
         ep.sinopse,
         ep.capitulos_manga && `Capítulos do mangá: ${ep.capitulos_manga}.`,
         minutos(ep) && `${minutos(ep)} min, sem abertura, encerramento e recapitulação.`,
@@ -151,22 +159,22 @@ escrever(`meta/series/${serie.id}.json`, {
 for (const ep of episodios) {
   escrever(`stream/series/${idVideo(ep)}.json`, {
     streams: ep.streams.map((s) => ({
-      name: "Naruto Kai\nDublado",
+      name: "Pastel\nProvider",
       ...s,
-      title: `${codigo(ep)} — ${ep.titulo}\n🇧🇷 Dublado${minutos(ep) ? ` · ${minutos(ep)} min` : ""}`,
+      title: `${temporada(ep).nome} · ${codigo(ep)} — ${ep.titulo}\n🇧🇷 Dublado${minutos(ep) ? ` · ${minutos(ep)} min` : ""}`,
       behaviorHints: { bingeGroup: `${serie.id}-dublado`, ...s.behaviorHints },
     })),
   });
 }
 
-const urlManifesto = `${URL_BASE}/manifest.json`;
+const urlManifesto = `${URL_ESPELHO}/manifest.json`;
 const escapar = (t) => String(t).replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" })[c]);
 const cartoes = episodios
   .map((ep) => `<li class="ep${ep.streams.length ? "" : " pendente"}">
           <img src="${escapar(ep.miniatura || fundo)}" alt="" loading="lazy">
           <span class="num">${codigo(ep)}</span>
           <strong>${escapar(ep.titulo)}</strong>
-          <small>${escapar(arcoDe(ep.original ?? ep.episodio) ?? "")}${minutos(ep) ? ` · ${minutos(ep)} min` : ""}</small>
+          <small>${escapar(arcoDe(ep) ?? temporada(ep).nome)}${minutos(ep) ? ` · ${minutos(ep)} min` : ""}</small>
         </li>`)
   .join("\n        ");
 const disponiveis = episodios.filter((ep) => ep.streams.length).length;
@@ -181,7 +189,6 @@ escrever(
     .replaceAll("{{DISPONIVEIS}}", String(disponiveis))
     .replaceAll("{{POSTER}}", poster)
     .replaceAll("{{FUNDO}}", fundo)
-    .replaceAll("{{LOGO}}", logo)
     .replaceAll("{{DESCRICAO}}", escapar(serie.descricao.split("\n")[0])),
 );
 

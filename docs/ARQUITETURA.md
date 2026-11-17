@@ -26,13 +26,13 @@ O Stremio aceita complementos que são só arquivos JSON em endereços fixos. N�
 | Endereço | Conteúdo |
 |---|---|
 | `/manifest.json` | Identidade do complemento, recursos e catálogo |
-| `/catalog/series/nkdub.json` | A série no catálogo |
-| `/meta/series/nkdub.json` | Detalhes da série e a lista de episódios |
-| `/stream/series/nkdub-<temporada>-<episódio>.json` | Fontes de vídeo do episódio |
+| `/catalog/series/pastel.json` | A série no catálogo |
+| `/meta/series/pastel.json` | Detalhes da série e a lista de episódios |
+| `/stream/series/pastel-<temporada>-<episódio>.json` | Fontes de vídeo do episódio |
 
 **Atualização sem reinstalar.** O Stremio guarda só o endereço do manifesto e busca catálogo, metadados e fontes a cada acesso. Novos episódios, títulos e links aparecem sozinhos depois do `git push` (o GitHub Pages pode levar até ~10 minutos por causa do cache). Só é preciso reinstalar se mudar o `id` do manifesto ou a lista de recursos.
 
-**Identificadores sem dois-pontos.** Os episódios usam `nkdub-1-1` em vez do comum `nkdub:1:1`, porque `:` é proibido em nomes de arquivo no Windows. Assim o projeto funciona igual em qualquer sistema.
+**Identificadores sem dois-pontos.** Os episódios usam `pastel-1-1` em vez do comum `pastel:1:1`, porque `:` é proibido em nomes de arquivo no Windows. Assim o projeto funciona igual em qualquer sistema.
 
 **Fonte única de verdade.** `dados/` é editado à mão ou pelas ferramentas; `dist/` é sempre gerado por `scripts/build.mjs` e nunca vai para o Git.
 
