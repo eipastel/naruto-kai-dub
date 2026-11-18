@@ -1,7 +1,7 @@
 {
   "id": "pastel",
   "nome": "Pastel Provider",
-  "descricao": "Sua coleção particular, organizada como uma série: cada temporada é uma obra diferente.\n\nTemporada 1 — Naruto Dublado: o Naruto clássico dublado em português, no estilo Kai, só com a história do mangá, sem fillers, aberturas, encerramentos, prévias e recapitulações.\n\nProjeto pessoal, sem fins lucrativos. Este complemento não hospeda vídeos: ele aponta para arquivos servidos pelo próprio usuário.",
+  "descricao": "Sua coleção particular, organizada como uma série: cada temporada é uma obra diferente.\n\nTemporada 1 — Naruto Dublado: o Naruto clássico dublado em português, no estilo Kai, só com a história do mangá, sem fillers, aberturas, encerramentos, prévias e recapitulações.\n\nTemporada 2 — Naruto Tela Cheia (POC): teste do Naruto clássico preenchendo a tela 16:9.\n\nProjeto pessoal, sem fins lucrativos. Este complemento não hospeda vídeos: ele aponta para arquivos servidos pelo próprio usuário.",
   "generos": [
     "Animação",
     "Ação",
@@ -47,6 +47,9 @@
           "nome": "Resgate do Sasuke"
         }
       ]
+    },
+    "2": {
+      "nome": "Naruto Tela Cheia (POC)"
     }
   }
 }

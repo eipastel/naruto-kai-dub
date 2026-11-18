@@ -1,0 +1,45 @@
+{
+  "temporada": 2,
+  "episodio": 1,
+  "original": 1,
+  "titulo": "O garoto mais barulhento da vila",
+  "sinopse": "POC de tela cheia: o mesmo episódio 1 em três versões 16:9 para comparar.",
+  "adicionado_em": "2026-11-18",
+  "miniatura": "https://episodes.metahub.space/tt0409591/1/1/w780.jpg",
+  "removidos": [],
+  "streams": [
+    {
+      "name": "Panorama\n(corte leve + bordas esticadas)",
+      "url": "https://192-168-1-12.local-ip.sh:8642/Naruto%20Tela%20Cheia%20POC%20-%20E001%20-%20Panorama.mp4",
+      "subtitles": [
+        {
+          "id": "pt-br",
+          "lang": "por",
+          "url": "https://192-168-1-12.local-ip.sh:8642/Naruto%20Kai%20Dublado%20-%20E001.srt"
+        }
+      ]
+    },
+    {
+      "name": "Desfoque\n(laterais borradas)",
+      "url": "https://192-168-1-12.local-ip.sh:8642/Naruto%20Tela%20Cheia%20POC%20-%20E001%20-%20Desfoque.mp4",
+      "subtitles": [
+        {
+          "id": "pt-br",
+          "lang": "por",
+          "url": "https://192-168-1-12.local-ip.sh:8642/Naruto%20Kai%20Dublado%20-%20E001.srt"
+        }
+      ]
+    },
+    {
+      "name": "Corte\n(25% em cima e embaixo)",
+      "url": "https://192-168-1-12.local-ip.sh:8642/Naruto%20Tela%20Cheia%20POC%20-%20E001%20-%20Corte.mp4",
+      "subtitles": [
+        {
+          "id": "pt-br",
+          "lang": "por",
+          "url": "https://192-168-1-12.local-ip.sh:8642/Naruto%20Kai%20Dublado%20-%20E001.srt"
+        }
+      ]
+    }
+  ]
+}
