@@ -18,7 +18,14 @@
   "streams": [
     {
       "url": "https://192-168-1-12.local-ip.sh:8642/Naruto%20Kai%20Dublado%20-%20E001.mp4",
-      "title": "E001 — Naruto Uzumaki Chegando!\n🇧🇷 Dublado · rede de casa"
+      "title": "E001 — Naruto Uzumaki Chegando!\n🇧🇷 Dublado · rede de casa",
+      "subtitles": [
+        {
+          "id": "pt-br",
+          "lang": "por",
+          "url": "https://192-168-1-12.local-ip.sh:8642/Naruto%20Kai%20Dublado%20-%20E001.srt"
+        }
+      ]
     }
   ]
 }

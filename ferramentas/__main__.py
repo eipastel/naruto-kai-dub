@@ -3,6 +3,7 @@
 Comandos (modo clássico: gera o "Kai" a partir do Naruto clássico dublado):
   limpar [episódios]      detecta abertura, encerramento, prévia e recapitulação
   montar [episódios]      gera os MP4 sem esses trechos e registra os links
+  legendar [episódios]    transcreve a dublagem (Whisper) e registra a legenda PT-BR
   Episódios: "1-135", "5", "1,2,10-20". Sem argumento = todos os canônicos.
 
 Comandos (modo Kai: usa um arquivo do Naruto Kai como molde):
@@ -204,7 +205,51 @@ def cmd_montar(args):
                                                     f"Naruto Kai Dublado E{n:03d} - {dados['titulo']}"), check=True)
             temporario.replace(saida)
         if cfg.get("url_streams"):
-            dados["streams"] = [{"url": f"{cfg['url_streams'].rstrip('/')}/{quote(nome)}"}]
+            # mantém o resto do stream (ex.: legendas) e só atualiza o link
+            dados["streams"] = [{**(dados.get("streams") or [{}])[0], "url": f"{cfg['url_streams'].rstrip('/')}/{quote(nome)}"}]
+            gravar(destino, dados)
+
+
+def tempo_srt(segundos):
+    """75.5 -> '00:01:15,500'"""
+    ms = round(segundos * 1000)
+    return f"{ms // 3600000:02d}:{ms // 60000 % 60:02d}:{ms // 1000 % 60:02d},{ms % 1000:03d}"
+
+
+# Nomes que a transcrição costuma errar; servem de dica para o modelo.
+VOCABULARIO = "Naruto Uzumaki, Sasuke Uchiha, Sakura Haruno, Kakashi, Iruka, Konoha, Hokage, ninja, jutsu, chakra, Sharingan."
+
+
+def cmd_legendar(args):
+    import importlib.util
+    import os
+    from faster_whisper import WhisperModel  # pip install faster-whisper
+    # No Windows as DLLs CUDA do pip (nvidia-cublas-cu12, nvidia-cudnn-cu12) não ficam no PATH.
+    pacote = importlib.util.find_spec("nvidia")
+    for raiz in (pacote.submodule_search_locations if pacote else []):
+        for bin_ in Path(raiz).glob("*/bin"):
+            os.environ["PATH"] = f"{bin_}{os.pathsep}{os.environ['PATH']}"
+    cfg, _, _, canonicos = classico()
+    pasta = Path(cfg.get("pasta_saida", RAIZ / "saida"))
+    modelo = WhisperModel(args.modelo, device=args.dispositivo)
+    for n in faixa(args.episodios, canonicos):
+        video = pasta / f"Naruto Kai Dublado - E{n:03d}.mp4"
+        destino = EPISODIOS / f"{chave(n)}.json"
+        if not video.exists() or not destino.exists():
+            print(f"E{n:03d}: rode 'montar' antes")
+            continue
+        legenda = video.with_suffix(".srt")
+        if legenda.exists() and not args.forcar:
+            print(f"E{n:03d}: legenda já existe, mantida (use --forcar para refazer)")
+        else:
+            print(f"E{n:03d}: transcrevendo ...", flush=True)
+            trechos, _ = modelo.transcribe(str(video), language="pt", vad_filter=True, initial_prompt=VOCABULARIO)
+            legenda.write_text("".join(f"{i}\n{tempo_srt(t.start)} --> {tempo_srt(t.end)}\n{t.text.strip()}\n\n"
+                                       for i, t in enumerate(trechos, 1)), encoding="utf-8")
+        dados = json.loads(destino.read_text(encoding="utf-8"))
+        if cfg.get("url_streams") and dados.get("streams"):
+            dados["streams"][0]["subtitles"] = [{"id": "pt-br", "lang": "por",
+                                                 "url": f"{cfg['url_streams'].rstrip('/')}/{quote(legenda.name)}"}]
             gravar(destino, dados)
 
 
@@ -227,6 +272,13 @@ def main(argv=None):
     s.add_argument("episodios", nargs="?", help='ex.: "1-135" (padrão: todos os canônicos)')
     s.add_argument("--forcar", action="store_true", help="refaz MP4 que já existem")
     s.set_defaults(func=cmd_montar)
+
+    s = sub.add_parser("legendar", help="transcreve a dublagem e registra a legenda PT-BR")
+    s.add_argument("episodios", nargs="?", help='ex.: "1-10" (padrão: todos os canônicos)')
+    s.add_argument("--modelo", default="large-v3", help="modelo do Whisper (padrão large-v3)")
+    s.add_argument("--dispositivo", default="cuda", help="cuda (placa NVIDIA) ou cpu")
+    s.add_argument("--forcar", action="store_true", help="refaz legendas que já existem (apaga ajustes manuais)")
+    s.set_defaults(func=cmd_legendar)
 
     s = sub.add_parser("novo", help="cria o JSON de um novo episódio")
     s.add_argument("episodio", type=int)
