@@ -1,0 +1,874 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Pastel Provider</title>
+  <meta name="description" content="Sua coleção particular, organizada como uma série: cada temporada é uma obra diferente.">
+  <meta property="og:title" content="Pastel Provider — complemento Stremio">
+  <meta property="og:description" content="Sua coleção particular, organizada como uma série: cada temporada é uma obra diferente.">
+  <meta property="og:image" content="https://cdn.jsdelivr.net/gh/eipastel/pastel-provider@addon/arte/fundo.jpg">
+  <link rel="icon" href="https://cdn.jsdelivr.net/gh/eipastel/pastel-provider@addon/arte/poster.jpg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root { --fundo: #0f0c0a; --cartao: #1b1612; --linha: #2c241d; --texto: #f6efe7; --suave: #b3a493; --laranja: #f47216; --laranja2: #ff9a3c; }
+    * { box-sizing: border-box; }
+    body { margin: 0; font: 16px/1.6 Inter, system-ui, sans-serif; color: var(--texto); background: var(--fundo); }
+    a { color: var(--laranja2); }
+    .heroi { position: relative; min-height: 78vh; display: grid; align-items: end; padding: 48px 16px; overflow: hidden; }
+    .heroi::before { content: ""; position: absolute; inset: 0; background: url("https://cdn.jsdelivr.net/gh/eipastel/pastel-provider@addon/arte/fundo.jpg") center / cover; transform: scale(1.03); }
+    .heroi::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, #0f0c0a33 0%, #0f0c0acc 60%, var(--fundo) 100%), linear-gradient(90deg, #0f0c0aee 0%, #0f0c0a00 70%); }
+    .conteudo { position: relative; z-index: 1; max-width: 1100px; margin: 0 auto; width: 100%; display: flex; gap: 32px; align-items: flex-end; }
+    .poster { width: 210px; border-radius: 12px; box-shadow: 0 20px 50px #000a; flex: none; }
+    .logo { max-width: 360px; width: 100%; display: block; margin-bottom: 4px; }
+    h1 { font: 400 clamp(2.6rem, 6vw, 4.4rem)/1 "Bebas Neue", sans-serif; letter-spacing: .02em; margin: 0 0 12px; }
+    h1 span { color: var(--laranja); }
+    .selos { display: flex; flex-wrap: wrap; gap: 8px; margin: 0 0 16px; padding: 0; list-style: none; }
+    .selos li { background: #ffffff14; border: 1px solid #ffffff22; padding: 4px 10px; border-radius: 999px; font-size: .85rem; }
+    .resumo { color: #e3d6c7; max-width: 620px; margin: 0 0 22px; }
+    .acoes { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; }
+    .botao { background: linear-gradient(135deg, var(--laranja), var(--laranja2)); color: #1a0d03; font-weight: 700; padding: 14px 24px; border-radius: 10px; text-decoration: none; box-shadow: 0 8px 24px #f4721655; }
+    .botao:hover { filter: brightness(1.08); }
+    main { max-width: 1100px; margin: 0 auto; padding: 8px 16px 64px; }
+    .instalar { background: var(--cartao); border: 1px solid var(--linha); border-radius: 14px; padding: 20px; margin: -8px 0 40px; }
+    .instalar h2 { margin-top: 0; }
+    .copiar { display: flex; gap: 8px; }
+    .copiar code { flex: 1; overflow-wrap: anywhere; background: #0006; border: 1px solid var(--linha); padding: 10px 12px; border-radius: 8px; }
+    .copiar button { background: var(--linha); color: var(--texto); border: 0; border-radius: 8px; padding: 0 16px; font: inherit; cursor: pointer; }
+    .passos { color: var(--suave); padding-left: 20px; margin-bottom: 0; }
+    h2 { font: 400 2rem/1 "Bebas Neue", sans-serif; letter-spacing: .03em; }
+    .contagem { color: var(--suave); margin-top: -8px; }
+    .grade { list-style: none; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 16px; }
+    .ep { background: var(--cartao); border: 1px solid var(--linha); border-radius: 12px; overflow: hidden; position: relative; display: flex; flex-direction: column; }
+    .ep img { width: 100%; aspect-ratio: 16 / 9; object-fit: cover; background: #000; }
+    .ep .num { position: absolute; top: 8px; left: 8px; background: #000b; padding: 2px 8px; border-radius: 6px; font-size: .8rem; font-weight: 700; }
+    .ep strong { padding: 10px 12px 0; font-size: .95rem; line-height: 1.35; }
+    .ep small { padding: 4px 12px 12px; color: var(--suave); }
+    .ep.pendente img { filter: grayscale(1) brightness(.6); }
+    .ep.pendente::after { content: "em preparação"; position: absolute; top: 8px; right: 8px; background: #000b; color: var(--suave); padding: 2px 8px; border-radius: 6px; font-size: .75rem; }
+    footer { color: var(--suave); font-size: .85rem; border-top: 1px solid var(--linha); padding-top: 20px; margin-top: 40px; }
+    @media (max-width: 640px) {
+      .poster { display: none; }
+      .heroi { min-height: 64vh; }
+      .copiar { flex-direction: column; }
+      .copiar button { padding: 10px; }
+    }
+  </style>
+</head>
+<body>
+  <header class="heroi">
+    <div class="conteudo">
+      <img class="poster" src="https://cdn.jsdelivr.net/gh/eipastel/pastel-provider@addon/arte/poster.jpg" alt="Pôster do Pastel Provider">
+      <div>
+        <h1>Pastel <span>Provider</span></h1>
+        <ul class="selos">
+          <li>Temporada 1 · Naruto Dublado</li>
+          <li>🇧🇷 Dublagem brasileira</li>
+          <li>Sem fillers e sem abertura</li>
+          <li>Smart TV LG</li>
+        </ul>
+        <p class="resumo">Sua coleção particular, organizada como uma série: cada temporada é uma obra diferente.</p>
+        <div class="acoes">
+          <a class="botao" href="stremio://cdn.jsdelivr.net/gh/eipastel/pastel-provider@addon/manifest.json">Instalar no Stremio</a>
+          <a href="https://github.com/eipastel/pastel-provider">Código no GitHub</a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="instalar">
+      <h2>Instalar na TV ou no celular</h2>
+      <div class="copiar">
+        <code id="manifesto">https://cdn.jsdelivr.net/gh/eipastel/pastel-provider@addon/manifest.json</code>
+        <button type="button" onclick="navigator.clipboard.writeText(document.getElementById('manifesto').textContent).then(() => this.textContent = 'Copiado!')">Copiar</button>
+      </div>
+      <ol class="passos">
+        <li>Abra o Stremio e vá em <strong>Complementos</strong>.</li>
+        <li>Cole o endereço acima na busca e toque em <strong>Instalar</strong>.</li>
+        <li>Na TV LG, também dá para instalar no computador com a mesma conta: a TV sincroniza sozinha.</li>
+      </ol>
+    </section>
+
+    <h2>Episódios</h2>
+    <p class="contagem">128 de 128 episódios disponíveis</p>
+    <ul class="grade">
+        <li class="ep">
+          <img src="https://episodes.metahub.space/tt0409591/1/1/w780.jpg" alt="" loading="lazy">
+          <span class="num">E001</span>
+          <strong>O garoto mais barulhento da vila</strong>
+          <small>Prólogo · 22 min</small>
+        </li>
+        <li class="ep">
+          <img src="https://episodes.metahub.space/tt0409591/1/2/w780.jpg" alt="" loading="lazy">
+          <span class="num">E002</span>
+          <strong>Um fã inesperado</strong>
+          <small>Prólogo · 20 min</small>
+        </li>
+        <li class="ep">
+          <img src="https://episodes.metahub.space/tt0409591/1/3/w780.jpg" alt="" loading="lazy">
+          <span class="num">E003</span>
+          <strong>Rivais de sala</strong>
+          <small>Prólogo · 20 min</small>
+        </li>
+        <li class="ep">
+          <img src="https://episodes.metahub.space/tt0409591/1/4/w780.jpg" alt="" loading="lazy">
+          <span class="num">E004</span>
+          <strong>O professor atrasado</strong>
+          <small>Prólogo · 20 min</small>
+        </li>
+        <li class="ep">
+          <img src="https://episodes.metahub.space/tt0409591/1/5/w780.jpg" alt="" loading="lazy">
+          <span class="num">E005</span>
+          <strong>Hora do almoço</strong>
+          <small>Prólogo · 19 min</small>
+        </li>
+        <li class="ep">
+          <img src="https://episodes.metahub.space/tt0409591/1/6/w780.jpg" alt="" loading="lazy">
+          <span class="num">E006</span>
+          <strong>Uma missão de verdade</strong>
+          <small>País das Ondas · 20 min</small>
+        </li>
+        <li class="ep">
+          <img src="https://episodes.metahub.space/tt0409591/1/7/w780.jpg" alt="" loading="lazy">
+          <span class="num">E007</span>
+          <strong>Neblina no caminho</strong>
+          <small>País das Ondas · 20 min</small>
+        </li>
+        <li class="ep">
+          <img src="https://episodes.metahub.space/tt0409591/1/8/w780.jpg" alt="" loading="lazy">
+          <span class="num">E008</span>
+          <strong>Medo e coragem</strong>
+          <small>País das Ondas · 17 min</small>
+        </li>
+        <li class="ep">
+          <img src="https://episodes.metahub.space/tt0409591/1/9/w780.jpg" alt="" loading="lazy">
+          <span class="num">E009</span>
+          <strong>O olho que copia</strong>
+          <small>País das Ondas · 20 min</small>
+        </li>
+        <li class="ep">
+          <img src="https://episodes.metahub.space/tt0409591/1/10/w780.jpg" alt="" loading="lazy">
+          <span class="num">E010</span>
+          <strong>Subindo em árvores</strong>
+          <small>País das Ondas · 20 min</small>
+        </li>
+        <li class="ep">
+          <img src="https://episodes.metahub.space/tt0409591/1/11/w780.jpg" alt="" loading="lazy">
+          <span class="num">E011</span>
+          <strong>Uma vila sem esperança</strong>
+          <small>País das Ondas · 20 min</small>
+        </li>
+        <li class="ep">
+          <img src="https://episodes.metahub.space/tt0409591/1/12/w780.jpg" alt="" loading="lazy">
+          <span class="num">E012</span>
+          <strong>Encontro na floresta</strong>
+          <small>País das Ondas · 20 min</small>
+        </li>
+        <li class="ep">
+          <img src="https://episodes.metahub.space/tt0409591/1/13/w780.jpg" alt="" loading="lazy">
+          <span class="num">E013</span>
+          <strong>Espelhos de gelo</strong>
+          <small>País das Ondas · 18 min</small>
+        </li>
+        <li class="ep">
+          <img src="https://episodes.metahub.space/tt0409591/1/14/w780.jpg" alt="" loading="lazy">
+          <span class="num">E014</span>
+          <strong>Chegada barulhenta</strong>
+          <small>País das Ondas · 20 min</small>
+        </li>
+        <li class="ep">
+          <img src="https://episodes.metahub.space/tt0409591/1/15/w780.jpg" alt="" loading="lazy">
+          <span class="num">E015</span>
+          <strong>Sem saída</strong>
+          <small>País das Ondas · 18 min</small>
+        </li>
+        <li class="ep">
+          <img src="https://episodes.metahub.space/tt0409591/1/16/w780.jpg" alt="" loading="lazy">
+          <span class="num">E016</span>
+          <strong>Fúria</strong>
+          <small>País das Ondas · 20 min</small>
+        </li>
+        <li class="ep">
+          <img src="https://episodes.metahub.space/tt0409591/1/17/w780.jpg" alt="" loading="lazy">
+          <span class="num">E017</span>
+          <strong>Um sonho simples</strong>
+          <small>País das Ondas · 19 min</small>
+        </li>
+        <li class="ep">
+          <img src="https://episodes.metahub.space/tt0409591/1/18/w780.jpg" alt="" loading="lazy">
+          <span class="num">E018</span>
+          <strong>O que é ser ninja</strong>
+          <small>País das Ondas · 20 min</small>
+        </li>
+        <li class="ep">
+          <img src="https://episodes.metahub.space/tt0409591/1/19/w780.jpg" alt="" loading="lazy">
+          <span class="num">E019</span>
+          <strong>O nome da ponte</strong>
+          <small>País das Ondas · 20 min</small>
+        </li>
+        <li class="ep">
+          <img src="https://episodes.metahub.space/tt0409591/1/20/w780.jpg" alt="" loading="lazy">
+          <span class="num">E020</span>
+          <strong>Visitantes da Areia</strong>
+          <small>Exame Chunin · 20 min</small>
+        </li>
+        <li class="ep">
+          <img src="https://episodes.metahub.space/tt0409591/1/21/w780.jpg" alt="" loading="lazy">
+          <span class="num">E021</span>
+          <strong>Inscrições abertas</strong>
+          <small>Exame Chunin · 20 min</small>
+        </li>
+        <li class="ep">
+          <img src="https://episodes.metahub.space/tt0409591/1/22/w780.jpg" alt="" loading="lazy">
+          <span class="num">E022</span>
+          <strong>O desafio do sobrancelhudo</strong>
+          <small>Exame Chunin · 20 min</small>
+        </li>
+        <li class="ep">
+          <img src="https://episodes.metahub.space/tt0409591/1/23/w780.jpg" alt="" loading="lazy">
+          <span class="num">E023</span>
+          <strong>Sala lotada</strong>
+          <small>Exame Chunin · 20 min</small>
+        </li>
+        <li class="ep">
+          <img src="https://episodes.metahub.space/tt0409591/1/24/w780.jpg" alt="" loading="lazy">
+          <span class="num">E024</span>
+          <strong>Prova escrita</strong>
+          <small>Exame Chunin · 20 min</small>
+        </li>
+        <li class="ep">
+          <img src="https://episodes.metahub.space/tt0409591/1/25/w780.jpg" alt="" loading="lazy">
+          <span class="num">E025</span>
+          <strong>A última pergunta</strong>
+          <small>Exame Chunin · 20 min</small>
+        </li>
+        <li class="ep">
+          <img src="https://episodes.metahub.space/tt0409591/1/27/w780.jpg" alt="" loading="lazy">
+          <span class="num">E027</span>
+          <strong>Floresta da Morte</strong>
+          <small>Exame Chunin · 20 min</small>
+        </li>
+        <li class="ep">
+          <img src="https://episodes.metahub.space/tt0409591/1/28/w780.jpg" alt="" loading="lazy">
+          <span class="num">E028</span>
+          <strong>Impostor</strong>
+          <small>Exame Chunin · 18 min</small>
+        </li>
+        <li class="ep">
+          <img src="https://episodes.metahub.space/tt0409591/1/29/w780.jpg" alt="" loading="lazy">
+          <span class="num">E029</span>
+          <strong>Não vou fugir</strong>
+          <small>Exame Chunin · 18 min</small>
+        </li>
+        <li class="ep">
+          <img src="https://episodes.metahub.space/tt0409591/1/30/w780.jpg" alt="" loading="lazy">
+          <span class="num">E030</span>
+          <strong>Olhos de fogo</strong>
+          <small>Exame Chunin · 20 min</small>
+        </li>
+        <li class="ep">
+          <img src="https://episodes.metahub.space/tt0409591/1/31/w780.jpg" alt="" loading="lazy">
+          <span class="num">E031</span>
+          <strong>Sozinha</strong>
+          <small>Exame Chunin · 19 min</small>
+        </li>
+        <li class="ep">
+          <img src="https://episodes.metahub.space/tt0409591/1/32/w780.jpg" alt="" loading="lazy">
+          <span class="num">E032</span>
+          <strong>Raízes</strong>
+          <small>Exame Chunin · 19 min</small>
+        </li>
+        <li class="ep">
+          <img src="https://episodes.metahub.space/tt0409591/1/33/w780.jpg" alt="" loading="lazy">
+          <span class="num">E033</span>
+          <strong>Trio de reforço</strong>
+          <small>Exame Chunin · 20 min</small>
+        </li>
+        <li class="ep">
+          <img src="https://episodes.metahub.space/tt0409591/1/34/w780.jpg" alt="" loading="lazy">
+          <span class="num">E034</span>
+          <strong>O que Kiba viu</strong>
+          <small>Exame Chunin · 20 min</small>
+        </li>
+        <li class="ep">
+          <img src="https://episodes.metahub.space/tt0409591/1/35/w780.jpg" alt="" loading="lazy">
+          <span class="num">E035</span>
+          <strong>Não abra o pergaminho</strong>
+          <small>Exame Chunin · 20 min</small>
+        </li>
+        <li class="ep">
+          <img src="https://episodes.metahub.space/tt0409591/2/1/w780.jpg" alt="" loading="lazy">
+          <span class="num">E036</span>
+          <strong>Uma noite inteira</strong>
+          <small>Exame Chunin · 19 min</small>
+        </li>
+        <li class="ep">
+          <img src="https://episodes.metahub.space/tt0409591/2/2/w780.jpg" alt="" loading="lazy">
+          <span class="num">E037</span>
+          <strong>A torre</strong>
+          <small>Exame Chunin · 19 min</small>
+        </li>
+        <li class="ep">
+          <img src="https://episodes.metahub.space/tt0409591/2/3/w780.jpg" alt="" loading="lazy">
+          <span class="num">E038</span>
+          <strong>Um contra um</strong>
+          <small>Exame Chunin · 19 min</small>
+        </li>
+        <li class="ep">
+          <img src="https://episodes.metahub.space/tt0409591/2/4/w780.jpg" alt="" loading="lazy">
+          <span class="num">E039</span>
+          <strong>Movimento emprestado</strong>
+          <small>Exame Chunin · 18 min</small>
+        </li>
+        <li class="ep">
+          <img src="https://episodes.metahub.space/tt0409591/2/5/w780.jpg" alt="" loading="lazy">
+          <span class="num">E040</span>
+          <strong>Visita indesejada</strong>
+          <small>Exame Chunin · 19 min</small>
+        </li>
+        <li class="ep">
+          <img src="https://episodes.metahub.space/tt0409591/2/6/w780.jpg" alt="" loading="lazy">
+          <span class="num">E041</span>
+          <strong>Amigas e rivais</strong>
+          <small>Exame Chunin · 20 min</small>
+        </li>
+        <li class="ep">
+          <img src="https://episodes.metahub.space/tt0409591/2/7/w780.jpg" alt="" loading="lazy">
+          <span class="num">E042</span>
+          <strong>Até o fim</strong>
+          <small>Exame Chunin · 18 min</small>
+        </li>
+        <li class="ep">
+          <img src="https://episodes.metahub.space/tt0409591/2/8/w780.jpg" alt="" loading="lazy">
+          <span class="num">E043</span>
+          <strong>Sombras</strong>
+          <small>Exame Chunin · 19 min</small>
+        </li>
+        <li class="ep">
+          <img src="https://episodes.metahub.space/tt0409591/2/9/w780.jpg" alt="" loading="lazy">
+          <span class="num">E044</span>
+          <strong>Faro de cachorro</strong>
+          <small>Exame Chunin · 20 min</small>
+        </li>
+        <li class="ep">
+          <img src="https://episodes.metahub.space/tt0409591/2/10/w780.jpg" alt="" loading="lazy">
+          <span class="num">E045</span>
+          <strong>Arma secreta</strong>
+          <small>Exame Chunin · 18 min</small>
+        </li>
+        <li class="ep">
+          <img src="https://episodes.metahub.space/tt0409591/2/11/w780.jpg" alt="" loading="lazy">
+          <span class="num">E046</span>
+          <strong>Primos</strong>
+          <small>Exame Chunin · 19 min</small>
+        </li>
+        <li class="ep">
+          <img src="https://episodes.metahub.space/tt0409591/2/12/w780.jpg" alt="" loading="lazy">
+          <span class="num">E047</span>
+          <strong>Destino</strong>
+          <small>Exame Chunin · 18 min</small>
+        </li>
+        <li class="ep">
+          <img src="https://episodes.metahub.space/tt0409591/2/13/w780.jpg" alt="" loading="lazy">
+          <span class="num">E048</span>
+          <strong>Areia e velocidade</strong>
+          <small>Exame Chunin · 18 min</small>
+        </li>
+        <li class="ep">
+          <img src="https://episodes.metahub.space/tt0409591/2/14/w780.jpg" alt="" loading="lazy">
+          <span class="num">E049</span>
+          <strong>Os portões</strong>
+          <small>Exame Chunin · 20 min</small>
+        </li>
+        <li class="ep">
+          <img src="https://episodes.metahub.space/tt0409591/2/15/w780.jpg" alt="" loading="lazy">
+          <span class="num">E050</span>
+          <strong>Até o limite</strong>
+          <small>Exame Chunin · 19 min</small>
+        </li>
+        <li class="ep">
+          <img src="https://episodes.metahub.space/tt0409591/2/16/w780.jpg" alt="" loading="lazy">
+          <span class="num">E051</span>
+          <strong>Visita no hospital</strong>
+          <small>Exame Chunin · 20 min</small>
+        </li>
+        <li class="ep">
+          <img src="https://episodes.metahub.space/tt0409591/2/17/w780.jpg" alt="" loading="lazy">
+          <span class="num">E052</span>
+          <strong>Novo professor</strong>
+          <small>Exame Chunin · 19 min</small>
+        </li>
+        <li class="ep">
+          <img src="https://episodes.metahub.space/tt0409591/2/18/w780.jpg" alt="" loading="lazy">
+          <span class="num">E053</span>
+          <strong>O sábio pervertido</strong>
+          <small>Exame Chunin · 20 min</small>
+        </li>
+        <li class="ep">
+          <img src="https://episodes.metahub.space/tt0409591/2/19/w780.jpg" alt="" loading="lazy">
+          <span class="num">E054</span>
+          <strong>Invocação</strong>
+          <small>Exame Chunin · 20 min</small>
+        </li>
+        <li class="ep">
+          <img src="https://episodes.metahub.space/tt0409591/2/20/w780.jpg" alt="" loading="lazy">
+          <span class="num">E055</span>
+          <strong>Flores</strong>
+          <small>Exame Chunin · 20 min</small>
+        </li>
+        <li class="ep">
+          <img src="https://episodes.metahub.space/tt0409591/2/21/w780.jpg" alt="" loading="lazy">
+          <span class="num">E056</span>
+          <strong>Queda livre</strong>
+          <small>Exame Chunin · 20 min</small>
+        </li>
+        <li class="ep">
+          <img src="https://episodes.metahub.space/tt0409591/2/22/w780.jpg" alt="" loading="lazy">
+          <span class="num">E057</span>
+          <strong>O chefe dos sapos</strong>
+          <small>Exame Chunin · 20 min</small>
+        </li>
+        <li class="ep">
+          <img src="https://episodes.metahub.space/tt0409591/2/23/w780.jpg" alt="" loading="lazy">
+          <span class="num">E058</span>
+          <strong>Perigo no hospital</strong>
+          <small>Exame Chunin · 20 min</small>
+        </li>
+        <li class="ep">
+          <img src="https://episodes.metahub.space/tt0409591/2/24/w780.jpg" alt="" loading="lazy">
+          <span class="num">E059</span>
+          <strong>Correndo para a arena</strong>
+          <small>Exame Chunin · 20 min</small>
+        </li>
+        <li class="ep">
+          <img src="https://episodes.metahub.space/tt0409591/2/25/w780.jpg" alt="" loading="lazy">
+          <span class="num">E060</span>
+          <strong>Frente a frente</strong>
+          <small>Exame Chunin · 19 min</small>
+        </li>
+        <li class="ep">
+          <img src="https://episodes.metahub.space/tt0409591/2/26/w780.jpg" alt="" loading="lazy">
+          <span class="num">E061</span>
+          <strong>Defesa perfeita</strong>
+          <small>Exame Chunin · 20 min</small>
+        </li>
+        <li class="ep">
+          <img src="https://episodes.metahub.space/tt0409591/2/27/w780.jpg" alt="" loading="lazy">
+          <span class="num">E062</span>
+          <strong>O azarão</strong>
+          <small>Exame Chunin · 20 min</small>
+        </li>
+        <li class="ep">
+          <img src="https://episodes.metahub.space/tt0409591/2/28/w780.jpg" alt="" loading="lazy">
+          <span class="num">E063</span>
+          <strong>Esperando Sasuke</strong>
+          <small>Exame Chunin · 20 min</small>
+        </li>
+        <li class="ep">
+          <img src="https://episodes.metahub.space/tt0409591/2/29/w780.jpg" alt="" loading="lazy">
+          <span class="num">E064</span>
+          <strong>Preguiça estratégica</strong>
+          <small>Exame Chunin · 20 min</small>
+        </li>
+        <li class="ep">
+          <img src="https://episodes.metahub.space/tt0409591/2/30/w780.jpg" alt="" loading="lazy">
+          <span class="num">E065</span>
+          <strong>A chegada</strong>
+          <small>Exame Chunin · 20 min</small>
+        </li>
+        <li class="ep">
+          <img src="https://episodes.metahub.space/tt0409591/2/31/w780.jpg" alt="" loading="lazy">
+          <span class="num">E066</span>
+          <strong>Velocidade nova</strong>
+          <small>Exame Chunin · 20 min</small>
+        </li>
+        <li class="ep">
+          <img src="https://episodes.metahub.space/tt0409591/2/32/w780.jpg" alt="" loading="lazy">
+          <span class="num">E067</span>
+          <strong>Um golpe novo</strong>
+          <small>Exame Chunin · 20 min</small>
+        </li>
+        <li class="ep">
+          <img src="https://episodes.metahub.space/tt0409591/2/33/w780.jpg" alt="" loading="lazy">
+          <span class="num">E068</span>
+          <strong>Hora zero</strong>
+          <small>Destruição de Konoha · 19 min</small>
+        </li>
+        <li class="ep">
+          <img src="https://episodes.metahub.space/tt0409591/2/34/w780.jpg" alt="" loading="lazy">
+          <span class="num">E069</span>
+          <strong>Missão urgente</strong>
+          <small>Destruição de Konoha · 19 min</small>
+        </li>
+        <li class="ep">
+          <img src="https://episodes.metahub.space/tt0409591/2/35/w780.jpg" alt="" loading="lazy">
+          <span class="num">E070</span>
+          <strong>Ficar para trás</strong>
+          <small>Destruição de Konoha · 19 min</small>
+        </li>
+        <li class="ep">
+          <img src="https://episodes.metahub.space/tt0409591/2/36/w780.jpg" alt="" loading="lazy">
+          <span class="num">E071</span>
+          <strong>Hokage contra Hokage</strong>
+          <small>Destruição de Konoha · 20 min</small>
+        </li>
+        <li class="ep">
+          <img src="https://episodes.metahub.space/tt0409591/2/37/w780.jpg" alt="" loading="lazy">
+          <span class="num">E072</span>
+          <strong>Velhas lembranças</strong>
+          <small>Destruição de Konoha · 20 min</small>
+        </li>
+        <li class="ep">
+          <img src="https://episodes.metahub.space/tt0409591/2/38/w780.jpg" alt="" loading="lazy">
+          <span class="num">E073</span>
+          <strong>O preço de um selo</strong>
+          <small>Destruição de Konoha · 19 min</small>
+        </li>
+        <li class="ep">
+          <img src="https://episodes.metahub.space/tt0409591/2/39/w780.jpg" alt="" loading="lazy">
+          <span class="num">E074</span>
+          <strong>Quem é Gaara</strong>
+          <small>Destruição de Konoha · 20 min</small>
+        </li>
+        <li class="ep">
+          <img src="https://episodes.metahub.space/tt0409591/2/40/w780.jpg" alt="" loading="lazy">
+          <span class="num">E075</span>
+          <strong>Pressão</strong>
+          <small>Destruição de Konoha · 19 min</small>
+        </li>
+        <li class="ep">
+          <img src="https://episodes.metahub.space/tt0409591/2/41/w780.jpg" alt="" loading="lazy">
+          <span class="num">E076</span>
+          <strong>Noite de lua</strong>
+          <small>Destruição de Konoha · 20 min</small>
+        </li>
+        <li class="ep">
+          <img src="https://episodes.metahub.space/tt0409591/2/42/w780.jpg" alt="" loading="lazy">
+          <span class="num">E077</span>
+          <strong>Duas solidões</strong>
+          <small>Destruição de Konoha · 20 min</small>
+        </li>
+        <li class="ep">
+          <img src="https://episodes.metahub.space/tt0409591/2/43/w780.jpg" alt="" loading="lazy">
+          <span class="num">E078</span>
+          <strong>Gigantes</strong>
+          <small>Destruição de Konoha · 20 min</small>
+        </li>
+        <li class="ep">
+          <img src="https://episodes.metahub.space/tt0409591/2/44/w780.jpg" alt="" loading="lazy">
+          <span class="num">E079</span>
+          <strong>Além do limite</strong>
+          <small>Destruição de Konoha · 18 min</small>
+        </li>
+        <li class="ep">
+          <img src="https://episodes.metahub.space/tt0409591/2/45/w780.jpg" alt="" loading="lazy">
+          <span class="num">E080</span>
+          <strong>Chuva em Konoha</strong>
+          <small>Destruição de Konoha · 20 min</small>
+        </li>
+        <li class="ep">
+          <img src="https://episodes.metahub.space/tt0409591/2/46/w780.jpg" alt="" loading="lazy">
+          <span class="num">E081</span>
+          <strong>Visitantes de preto</strong>
+          <small>Busca por Tsunade · 19 min</small>
+        </li>
+        <li class="ep">
+          <img src="https://episodes.metahub.space/tt0409591/2/47/w780.jpg" alt="" loading="lazy">
+          <span class="num">E082</span>
+          <strong>Olhos iguais</strong>
+          <small>Busca por Tsunade · 19 min</small>
+        </li>
+        <li class="ep">
+          <img src="https://episodes.metahub.space/tt0409591/2/48/w780.jpg" alt="" loading="lazy">
+          <span class="num">E083</span>
+          <strong>Viagem com o sábio</strong>
+          <small>Busca por Tsunade · 20 min</small>
+        </li>
+        <li class="ep">
+          <img src="https://episodes.metahub.space/tt0409591/3/1/w780.jpg" alt="" loading="lazy">
+          <span class="num">E084</span>
+          <strong>Reencontro</strong>
+          <small>Busca por Tsunade · 20 min</small>
+        </li>
+        <li class="ep">
+          <img src="https://episodes.metahub.space/tt0409591/3/2/w780.jpg" alt="" loading="lazy">
+          <span class="num">E085</span>
+          <strong>O último Uchiha</strong>
+          <small>Busca por Tsunade · 20 min</small>
+        </li>
+        <li class="ep">
+          <img src="https://episodes.metahub.space/tt0409591/3/3/w780.jpg" alt="" loading="lazy">
+          <span class="num">E086</span>
+          <strong>Novo treino</strong>
+          <small>Busca por Tsunade · 20 min</small>
+        </li>
+        <li class="ep">
+          <img src="https://episodes.metahub.space/tt0409591/3/4/w780.jpg" alt="" loading="lazy">
+          <span class="num">E087</span>
+          <strong>Balão d'água</strong>
+          <small>Busca por Tsunade · 20 min</small>
+        </li>
+        <li class="ep">
+          <img src="https://episodes.metahub.space/tt0409591/3/5/w780.jpg" alt="" loading="lazy">
+          <span class="num">E088</span>
+          <strong>Na trilha de Tsunade</strong>
+          <small>Busca por Tsunade · 20 min</small>
+        </li>
+        <li class="ep">
+          <img src="https://episodes.metahub.space/tt0409591/3/6/w780.jpg" alt="" loading="lazy">
+          <span class="num">E089</span>
+          <strong>Uma proposta difícil</strong>
+          <small>Busca por Tsunade · 20 min</small>
+        </li>
+        <li class="ep">
+          <img src="https://episodes.metahub.space/tt0409591/3/7/w780.jpg" alt="" loading="lazy">
+          <span class="num">E090</span>
+          <strong>Respeito</strong>
+          <small>Busca por Tsunade · 20 min</small>
+        </li>
+        <li class="ep">
+          <img src="https://episodes.metahub.space/tt0409591/3/8/w780.jpg" alt="" loading="lazy">
+          <span class="num">E091</span>
+          <strong>Uma aposta</strong>
+          <small>Busca por Tsunade · 20 min</small>
+        </li>
+        <li class="ep">
+          <img src="https://episodes.metahub.space/tt0409591/3/9/w780.jpg" alt="" loading="lazy">
+          <span class="num">E092</span>
+          <strong>Escolha</strong>
+          <small>Busca por Tsunade · 20 min</small>
+        </li>
+        <li class="ep">
+          <img src="https://episodes.metahub.space/tt0409591/3/10/w780.jpg" alt="" loading="lazy">
+          <span class="num">E093</span>
+          <strong>Acordo desfeito</strong>
+          <small>Busca por Tsunade · 20 min</small>
+        </li>
+        <li class="ep">
+          <img src="https://episodes.metahub.space/tt0409591/3/11/w780.jpg" alt="" loading="lazy">
+          <span class="num">E094</span>
+          <strong>Espiral</strong>
+          <small>Busca por Tsunade · 19 min</small>
+        </li>
+        <li class="ep">
+          <img src="https://episodes.metahub.space/tt0409591/3/12/w780.jpg" alt="" loading="lazy">
+          <span class="num">E095</span>
+          <strong>Aposta de vida</strong>
+          <small>Busca por Tsunade · 19 min</small>
+        </li>
+        <li class="ep">
+          <img src="https://episodes.metahub.space/tt0409591/3/13/w780.jpg" alt="" loading="lazy">
+          <span class="num">E096</span>
+          <strong>Batalha dos Sannins</strong>
+          <small>Busca por Tsunade · 20 min</small>
+        </li>
+        <li class="ep">
+          <img src="https://episodes.metahub.space/tt0409591/3/15/w780.jpg" alt="" loading="lazy">
+          <span class="num">E098</span>
+          <strong>Volta para casa</strong>
+          <small>Busca por Tsunade · 20 min</small>
+        </li>
+        <li class="ep">
+          <img src="https://episodes.metahub.space/tt0409591/3/16/w780.jpg" alt="" loading="lazy">
+          <span class="num">E099</span>
+          <strong>Vontade do Fogo</strong>
+          <small>Busca por Tsunade · 20 min</small>
+        </li>
+        <li class="ep">
+          <img src="https://episodes.metahub.space/tt0409591/3/17/w780.jpg" alt="" loading="lazy">
+          <span class="num">E100</span>
+          <strong>Mestre e aluno</strong>
+          <small>Busca por Tsunade · 20 min</small>
+        </li>
+        <li class="ep">
+          <img src="https://episodes.metahub.space/tt0409591/3/24/w780.jpg" alt="" loading="lazy">
+          <span class="num">E107</span>
+          <strong>No telhado</strong>
+          <small>Resgate do Sasuke · 20 min</small>
+        </li>
+        <li class="ep">
+          <img src="https://episodes.metahub.space/tt0409591/3/25/w780.jpg" alt="" loading="lazy">
+          <span class="num">E108</span>
+          <strong>Laços</strong>
+          <small>Resgate do Sasuke · 19 min</small>
+        </li>
+        <li class="ep">
+          <img src="https://episodes.metahub.space/tt0409591/3/26/w780.jpg" alt="" loading="lazy">
+          <span class="num">E109</span>
+          <strong>Um convite</strong>
+          <small>Resgate do Sasuke · 20 min</small>
+        </li>
+        <li class="ep">
+          <img src="https://episodes.metahub.space/tt0409591/3/27/w780.jpg" alt="" loading="lazy">
+          <span class="num">E110</span>
+          <strong>O time de resgate</strong>
+          <small>Resgate do Sasuke · 19 min</small>
+        </li>
+        <li class="ep">
+          <img src="https://episodes.metahub.space/tt0409591/3/28/w780.jpg" alt="" loading="lazy">
+          <span class="num">E111</span>
+          <strong>Na pista</strong>
+          <small>Resgate do Sasuke · 20 min</small>
+        </li>
+        <li class="ep">
+          <img src="https://episodes.metahub.space/tt0409591/3/29/w780.jpg" alt="" loading="lazy">
+          <span class="num">E112</span>
+          <strong>Presos</strong>
+          <small>Resgate do Sasuke · 19 min</small>
+        </li>
+        <li class="ep">
+          <img src="https://episodes.metahub.space/tt0409591/3/30/w780.jpg" alt="" loading="lazy">
+          <span class="num">E113</span>
+          <strong>Choji</strong>
+          <small>Resgate do Sasuke · 19 min</small>
+        </li>
+        <li class="ep">
+          <img src="https://episodes.metahub.space/tt0409591/3/31/w780.jpg" alt="" loading="lazy">
+          <span class="num">E114</span>
+          <strong>Amigo de verdade</strong>
+          <small>Resgate do Sasuke · 19 min</small>
+        </li>
+        <li class="ep">
+          <img src="https://episodes.metahub.space/tt0409591/3/32/w780.jpg" alt="" loading="lazy">
+          <span class="num">E115</span>
+          <strong>Teias</strong>
+          <small>Resgate do Sasuke · 20 min</small>
+        </li>
+        <li class="ep">
+          <img src="https://episodes.metahub.space/tt0409591/3/33/w780.jpg" alt="" loading="lazy">
+          <span class="num">E116</span>
+          <strong>Ponto cego</strong>
+          <small>Resgate do Sasuke · 20 min</small>
+        </li>
+        <li class="ep">
+          <img src="https://episodes.metahub.space/tt0409591/3/34/w780.jpg" alt="" loading="lazy">
+          <span class="num">E117</span>
+          <strong>Não posso perder</strong>
+          <small>Resgate do Sasuke · 20 min</small>
+        </li>
+        <li class="ep">
+          <img src="https://episodes.metahub.space/tt0409591/3/35/w780.jpg" alt="" loading="lazy">
+          <span class="num">E118</span>
+          <strong>Corrida contra o tempo</strong>
+          <small>Resgate do Sasuke · 20 min</small>
+        </li>
+        <li class="ep">
+          <img src="https://episodes.metahub.space/tt0409591/3/36/w780.jpg" alt="" loading="lazy">
+          <span class="num">E119</span>
+          <strong>Reviravolta</strong>
+          <small>Resgate do Sasuke · 19 min</small>
+        </li>
+        <li class="ep">
+          <img src="https://episodes.metahub.space/tt0409591/3/37/w780.jpg" alt="" loading="lazy">
+          <span class="num">E120</span>
+          <strong>Uivos</strong>
+          <small>Resgate do Sasuke · 20 min</small>
+        </li>
+        <li class="ep">
+          <img src="https://episodes.metahub.space/tt0409591/3/38/w780.jpg" alt="" loading="lazy">
+          <span class="num">E121</span>
+          <strong>Cada um na sua luta</strong>
+          <small>Resgate do Sasuke · 19 min</small>
+        </li>
+        <li class="ep">
+          <img src="https://episodes.metahub.space/tt0409591/3/39/w780.jpg" alt="" loading="lazy">
+          <span class="num">E122</span>
+          <strong>Distração</strong>
+          <small>Resgate do Sasuke · 18 min</small>
+        </li>
+        <li class="ep">
+          <img src="https://episodes.metahub.space/tt0409591/3/40/w780.jpg" alt="" loading="lazy">
+          <span class="num">E123</span>
+          <strong>Uma chegada inesperada</strong>
+          <small>Resgate do Sasuke · 20 min</small>
+        </li>
+        <li class="ep">
+          <img src="https://episodes.metahub.space/tt0409591/3/41/w780.jpg" alt="" loading="lazy">
+          <span class="num">E124</span>
+          <strong>Punho cambaleante</strong>
+          <small>Resgate do Sasuke · 19 min</small>
+        </li>
+        <li class="ep">
+          <img src="https://episodes.metahub.space/tt0409591/3/42/w780.jpg" alt="" loading="lazy">
+          <span class="num">E125</span>
+          <strong>Aliados</strong>
+          <small>Resgate do Sasuke · 18 min</small>
+        </li>
+        <li class="ep">
+          <img src="https://episodes.metahub.space/tt0409591/3/43/w780.jpg" alt="" loading="lazy">
+          <span class="num">E126</span>
+          <strong>Areia contra osso</strong>
+          <small>Resgate do Sasuke · 20 min</small>
+        </li>
+        <li class="ep">
+          <img src="https://episodes.metahub.space/tt0409591/3/44/w780.jpg" alt="" loading="lazy">
+          <span class="num">E127</span>
+          <strong>Floresta de ossos</strong>
+          <small>Resgate do Sasuke · 20 min</small>
+        </li>
+        <li class="ep">
+          <img src="https://episodes.metahub.space/tt0409591/3/45/w780.jpg" alt="" loading="lazy">
+          <span class="num">E128</span>
+          <strong>Vale do Fim</strong>
+          <small>Resgate do Sasuke · 20 min</small>
+        </li>
+        <li class="ep">
+          <img src="https://episodes.metahub.space/tt0409591/3/46/w780.jpg" alt="" loading="lazy">
+          <span class="num">E129</span>
+          <strong>Irmãos</strong>
+          <small>Resgate do Sasuke · 20 min</small>
+        </li>
+        <li class="ep">
+          <img src="https://episodes.metahub.space/tt0409591/3/47/w780.jpg" alt="" loading="lazy">
+          <span class="num">E130</span>
+          <strong>O emblema</strong>
+          <small>Resgate do Sasuke · 19 min</small>
+        </li>
+        <li class="ep">
+          <img src="https://episodes.metahub.space/tt0409591/3/48/w780.jpg" alt="" loading="lazy">
+          <span class="num">E131</span>
+          <strong>Segredos do Sharingan</strong>
+          <small>Resgate do Sasuke · 19 min</small>
+        </li>
+        <li class="ep">
+          <img src="https://episodes.metahub.space/tt0409591/4/1/w780.jpg" alt="" loading="lazy">
+          <span class="num">E132</span>
+          <strong>Por um amigo</strong>
+          <small>Resgate do Sasuke · 20 min</small>
+        </li>
+        <li class="ep">
+          <img src="https://episodes.metahub.space/tt0409591/4/2/w780.jpg" alt="" loading="lazy">
+          <span class="num">E133</span>
+          <strong>Apelo</strong>
+          <small>Resgate do Sasuke · 20 min</small>
+        </li>
+        <li class="ep">
+          <img src="https://episodes.metahub.space/tt0409591/4/3/w780.jpg" alt="" loading="lazy">
+          <span class="num">E134</span>
+          <strong>Chuva no vale</strong>
+          <small>Resgate do Sasuke · 18 min</small>
+        </li>
+        <li class="ep">
+          <img src="https://episodes.metahub.space/tt0409591/4/4/w780.jpg" alt="" loading="lazy">
+          <span class="num">E135</span>
+          <strong>Uma promessa</strong>
+          <small>Resgate do Sasuke · 20 min</small>
+        </li>
+        <li class="ep">
+          <img src="https://episodes.metahub.space/tt0409591/1/1/w780.jpg" alt="" loading="lazy">
+          <span class="num">E001</span>
+          <strong>O garoto mais barulhento da vila</strong>
+          <small>Naruto Tela Cheia (POC)</small>
+        </li>
+    </ul>
+
+    <footer>
+      Versão 1.1.0 · Projeto de fã, sem fins lucrativos. Este complemento não hospeda vídeos.
+      Naruto © Masashi Kishimoto / Shueisha · Studio Pierrot. 
+      Miniaturas: Stremio/Cinemeta.
+    </footer>
+  </main>
+</body>
+</html>
