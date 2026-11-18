@@ -22,7 +22,14 @@
   ],
   "streams": [
     {
-      "url": "https://192-168-1-12.local-ip.sh:8642/Naruto%20Kai%20Dublado%20-%20E004.mp4"
+      "url": "https://192-168-1-12.local-ip.sh:8642/Naruto%20Kai%20Dublado%20-%20E004.mp4",
+      "subtitles": [
+        {
+          "id": "pt-br",
+          "lang": "por",
+          "url": "https://192-168-1-12.local-ip.sh:8642/Naruto%20Kai%20Dublado%20-%20E004.srt"
+        }
+      ]
     }
   ]
 }
