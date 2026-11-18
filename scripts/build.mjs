@@ -127,7 +127,7 @@ escrever("manifest.json", {
   description: serie.descricao,
   logo,
   background: fundo,
-  resources: ["catalog", "meta", "stream"],
+  resources: ["catalog", "meta", "stream", "subtitles"],
   types: ["series"],
   idPrefixes: [serie.id],
   catalogs: [{ type: "series", id: serie.id, name: serie.nome }],
@@ -165,6 +165,8 @@ for (const ep of episodios) {
       behaviorHints: { bingeGroup: `${serie.id}-dublado`, ...s.behaviorHints },
     })),
   });
+  // As mesmas legendas também como recurso "subtitles": o Stremio das TVs ignora as que vêm dentro do stream.
+  escrever(`subtitles/series/${idVideo(ep)}.json`, { subtitles: ep.streams.flatMap((s) => s.subtitles ?? []) });
 }
 
 const urlManifesto = `${URL_ESPELHO}/manifest.json`;
